@@ -1,0 +1,20 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local Codex agents and configuration
+/.codex/
+
+# Local FinanTrack collaboration skill
+/.agents/skills/fintrack-collaboration/
