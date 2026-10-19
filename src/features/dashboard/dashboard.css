@@ -89,6 +89,28 @@
 .expense-distribution__empty > svg { width: 65px; height: 65px; padding: 14px; border-radius: 50%; color: var(--color-primary); background: var(--color-surface-sidebar); margin-bottom: 18px; }
 .expense-distribution__empty strong { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); }
 .expense-distribution__empty p { max-width: 240px; margin: 7px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; text-transform: capitalize; }
+.budget-indicators__list { display: grid; gap: 17px; list-style: none; margin: 23px 0 0; padding: 0; }
+.budget-indicators__item { padding-top: 17px; border-top: 1px solid var(--color-border); }
+.budget-indicators__item:first-child { padding-top: 0; border-top: 0; }
+.budget-indicators__row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.budget-indicators__row h3 { min-width: 0; margin: 0; font-size: var(--font-size-xs); overflow-wrap: anywhere; }
+.budget-indicators__state { flex: 0 0 auto; padding: 3px 6px; border-radius: 6px; font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); }
+.budget-indicators__item--normal .budget-indicators__state { color: var(--color-success); background: var(--color-success-background); }
+.budget-indicators__item--warning .budget-indicators__state { color: var(--color-warning); background: var(--color-warning-background); }
+.budget-indicators__item--exceeded .budget-indicators__state { color: var(--color-danger); background: var(--color-danger-background); }
+.budget-indicators__amounts { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.budget-indicators__amounts strong { margin-left: 3px; color: var(--color-text); font-weight: var(--font-weight-medium); }
+.budget-indicators__bar { height: 8px; margin-top: 10px; overflow: hidden; border-radius: 999px; background: var(--color-progress-track); }
+.budget-indicators__bar > span { display: block; width: min(var(--budget-progress), 100%); height: 100%; border-radius: inherit; background: var(--color-goal-progress); }
+.budget-indicators__item--warning .budget-indicators__bar > span { background: var(--color-budget-warning); }
+.budget-indicators__item--exceeded .budget-indicators__bar > span { background: var(--color-budget-exceeded); }
+.budget-indicators__footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 7px; color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.budget-indicators__footer > span:first-child { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.budget-indicators__footer strong { color: var(--color-text); font-weight: var(--font-weight-medium); }
+.budget-indicators__empty { min-height: 215px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 12px 7px; text-align: center; }
+.budget-indicators__empty > svg { width: 65px; height: 65px; padding: 14px; border-radius: 50%; color: var(--color-primary); background: var(--color-surface-sidebar); margin-bottom: 18px; }
+.budget-indicators__empty strong { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); }
+.budget-indicators__empty p { max-width: 240px; margin: 7px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; text-transform: capitalize; }
 .empty-dashboard { display: flex; align-items: center; gap: 17px; padding: 20px; background: var(--color-surface-sidebar); border: 1px solid var(--color-border); border-radius: 15px; margin-bottom: 20px; }
 .empty-dashboard > svg { color: var(--color-primary); }
 .empty-dashboard h2 { margin: 0 0 5px; font-size: var(--font-size-sm); }
