@@ -11,7 +11,7 @@ La fuente inicial es Segoe UI en Windows, con alternativas del sistema. No se ha
 - src/app/styles/global.css: estilos base, foco visible y cifras tabulares.
 - src/app/styles/index.css: entrada unica del tema.
 
-React/Vite aun no esta inicializado. Cuando exista src/main.tsx, importar una sola vez:
+React/Vite esta inicializado. src/main.tsx importa una sola vez la entrada del tema:
 
 ```tsx
 import './app/styles/index.css';
@@ -52,4 +52,4 @@ const incomeColor = getComputedStyle(document.documentElement)
 
 Si el tema cambia dinamicamente, volver a resolver los colores del grafico. Acompanar ingresos, gastos y alertas con etiquetas o iconos: el color por si solo no expresa su significado.
 
-Este tema inicial es claro. No incluye pantallas ni modo oscuro. Los estilos solo se aplicaran cuando una aplicacion importe index.css.
+Este tema inicial es claro. Se aplica a la pantalla de arranque; no incluye panel financiero ni modo oscuro.
