@@ -52,4 +52,4 @@ const incomeColor = getComputedStyle(document.documentElement)
 
 Si el tema cambia dinamicamente, volver a resolver los colores del grafico. Acompanar ingresos, gastos y alertas con etiquetas o iconos: el color por si solo no expresa su significado.
 
-Este tema inicial es claro. Se aplica a la pantalla de arranque; no incluye panel financiero ni modo oscuro.
+FE-00 aplica este tema claro al contenedor responsive del panel: fondo lavanda, superficies blancas, sidebar suave, bordes redondeados e iconos Lucide. Conserva las familias del sistema y centraliza colores/tipografia en sus tokens. No se agrega Tailwind ni modo oscuro. Las tarjetas financieras funcionales corresponden a FE-01–FE-05; FE-00 muestra espacios pendientes sin cifras simuladas.

@@ -6,7 +6,7 @@ Equipo **Cosa1ycosa2**: Luciana Salinas y Claudia Orellana.
 
 ## Estado
 
-Aplicacion React + TypeScript + Vite inicializada. Incluye pantalla de inicio y comprobacion de conexion con la API; el panel financiero todavia no esta implementado.
+FE-00 implementa la base del panel con React + TypeScript + Vite: acceso, sesion en memoria, consulta mensual y estados de carga, error y vacio. Los indicadores y graficos se incorporaran en las siguientes features. Ver [entrega y validaciones pendientes](docs/fe-00-delivery.md).
 
 ## Desarrollo local
 
@@ -23,7 +23,7 @@ Abrir http://localhost:5173. `setup` crea `.env` desde el ejemplo solo si no exi
 
 Verificacion: `npm run lint`, `npm run typecheck`, `npm run build`. Para revisar el build local: `npm run preview` (http://localhost:4173); si se prueba la API desde ese puerto, ajustar temporalmente CORS_ORIGIN del backend y reiniciarlo. Preview no es un servidor de produccion.
 
-Se versionan scripts, configuraciones, `package.json` y `package-lock.json`. `.env`, `node_modules` y `dist` ya estan excluidos por `.gitignore`. No hay pruebas funcionales automatizadas del modulo financiero en esta etapa.
+Se versionan scripts, configuraciones, `package.json` y `package-lock.json`. `.env`, `node_modules` y `dist` estan excluidos por `.gitignore`. `npm test` ejecuta las pruebas de contrato, sesion y consulta; tambien se ejecutan en CI. Los escenarios `npm run test:e2e` estan preparados, pero su ejecucion y la integracion real con la API siguen pendientes. El acceso requiere un usuario existente en el backend y `VITE_API_BASE_URL` con el prefijo `/api/v1`; al recargar se debe iniciar sesion nuevamente.
 
 ## Arquitectura
 
