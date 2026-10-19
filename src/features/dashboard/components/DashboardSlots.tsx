@@ -1,6 +1,7 @@
-import { Flag, Target, type LucideIcon } from 'lucide-react';
+import { Flag, type LucideIcon } from 'lucide-react';
 import type { DashboardSections } from '../api/contract';
 import { BalanceCard } from './BalanceCard';
+import { BudgetIndicators } from './BudgetIndicators';
 import { ExpenseDistribution } from './ExpenseDistribution';
 import { MonthlySummaryCards } from './MonthlySummaryCards';
 
@@ -14,7 +15,7 @@ export function DashboardSlots({ sections, month }: { sections: DashboardSection
     <div className="metric-grid"><BalanceCard balance={sections.balance} /><MonthlySummaryCards summary={sections.monthlySummary} month={month} /><MetricSlot title="Metas de ahorro" icon={Flag} description="Un lugar para cada objetivo que te inspira." /></div>
     <div className="dashboard-section-grid">
       <ExpenseDistribution distribution={sections.expenseDistribution} month={month} />
-      <section className="panel-slot"><div className="panel-slot-heading"><div><h2>Presupuestos</h2><p>Más intención, menos sorpresas.</p></div><span className="tile-icon"><Target size={19} aria-hidden="true" /></span></div><div className="panel-slot-content"><span className="section-illustration" aria-hidden="true"><Target size={42} strokeWidth={1.2} /></span><strong>Un plan para tu mes.</strong><p>El detalle de tus presupuestos llegará a esta sección.</p></div></section>
+      <BudgetIndicators budgets={sections.budgets} month={month} />
     </div>
   </>;
 }
