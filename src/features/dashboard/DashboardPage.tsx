@@ -26,7 +26,7 @@ function DashboardContent({ month, setMonth }: { month: string; setMonth(value: 
     {result.status === 'success' && <>
       <div className="sync-banner" role="status"><span className="sync-check"><Check size={16} aria-hidden="true" /></span><div><strong>Tu información está conectada</strong><span>{monthLabel(result.data.period.month)} · Corte: {cutoffLabel(result.data.asOf)} (Bolivia)</span></div><ShieldCheck size={20} className="sync-shield" aria-hidden="true" /></div>
       {isEmptyDashboard(result.data) && <section className="empty-dashboard"><Leaf size={29} aria-hidden="true" /><div><h2>Tu historia financiera empieza aquí</h2><p>Todavía no hay datos financieros para mostrar. Tu panel distinguirá cada nuevo paso.</p></div></section>}
-      <DashboardSlots sections={result.data.sections} />
+      <DashboardSlots sections={result.data.sections} month={result.data.period.month} />
     </>}
   </>;
 }
