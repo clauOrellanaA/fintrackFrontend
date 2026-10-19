@@ -52,6 +52,16 @@
 .balance-card__cutoff svg { color: var(--color-primary); }
 .balance-card--unavailable h2 { font-size: var(--font-size-sm); margin: 0 0 8px; letter-spacing: -0.025em; }
 .balance-card--unavailable > p { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; }
+.summary-card { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-surface); }
+.summary-card__type { padding: 4px 7px; border-radius: 7px; font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); }
+.summary-card--income .summary-card__type { color: var(--color-income); background: var(--color-success-background); }
+.summary-card--expense .summary-card__type { color: var(--color-expense); background: var(--color-danger-background); }
+.summary-card h2 { margin: 0 0 9px; color: var(--color-text-secondary); font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); letter-spacing: 0; }
+.summary-card__amount { margin: 0; color: var(--color-text); font-size: var(--font-size-metric); font-weight: var(--font-weight-semibold); letter-spacing: -0.045em; line-height: var(--line-height-tight); overflow-wrap: anywhere; }
+.summary-card__period { display: flex; align-items: center; gap: 6px; margin: auto 0 0; padding-top: 15px; color: var(--color-text-secondary); font-size: var(--font-size-2xs); line-height: 1.5; text-transform: capitalize; }
+.summary-card--income .summary-card__period svg { color: var(--color-income); }
+.summary-card--expense .summary-card__period svg { color: var(--color-expense); }
+.summary-card--unavailable > p { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; }
 .metric-slot-heading { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 16px; }
 .tile-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--color-border); border-radius: 10px; color: var(--color-primary); background: var(--color-surface-sidebar); }
 .coming-soon { display: block; font-size: var(--font-size-2xs); color: var(--color-text-secondary); }
