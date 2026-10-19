@@ -51,3 +51,7 @@ El protocolo compartido esta en ../.agents/skills/fintrack-collaboration/SKILL.m
 En una nueva sesion puedes pedir: "Usa $fintrack-collaboration para planificar una feature con los agentes necesarios, sin implementar todavia".
 
 La skill tambien puede versionarse y las copias de ambos repositorios deben mantenerse sincronizadas.
+
+## Hooks de Codex
+
+Los hooks locales de este repositorio estan definidos en [hooks.json](./hooks.json). Protegen secretos y pruebas, ejecutan Vitest para dashboard/transacciones, verifican los tests antes de push de ramas feature y registran actividad sin comandos ni contenido de parches. La documentacion especifica esta en [codex-hooks.md](../docs/codex-hooks.md).
