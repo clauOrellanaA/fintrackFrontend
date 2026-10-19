@@ -1,0 +1,32 @@
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { expect, it, vi } from 'vitest';
+import { App } from '../../app/App';
+import { dashboardFixture, deferred, jsonResponse, sessionResponse } from '../../test/fixtures';
+
+it('renders login, loading, genuine empty finances and logout as distinct visible states', async () => {
+  vi.stubEnv('VITE_API_BASE_URL', 'http://localhost:3100/api/v1');
+  window.history.replaceState({}, '', '/dashboard');
+  const request = deferred<Response>();
+  vi.stubGlobal('fetch', vi.fn((url: string, options: RequestInit) => options.method === 'DELETE' ? Promise.resolve(new Response(null, { status: 204 })) : url.endsWith('/auth/login') ? Promise.resolve(sessionResponse()) : request.promise));
+  render(<App />);
+  const user = userEvent.setup();
+  expect(screen.getByRole('heading', { name: 'Tu panel te espera' })).toBeVisible();
+  await user.type(screen.getByLabelText('Correo electrónico'), 'alice@fintrack.test');
+  await user.type(screen.getByLabelText('Contraseña', { exact: true }), 'test-password');
+  await user.click(screen.getByRole('button', { name: 'Entrar a mi panel' }));
+  expect(await screen.findByText(/Cargando tu panel/)).toBeInTheDocument();
+  const empty = dashboardFixture();
+  empty.period.month = new URL(String(vi.mocked(fetch).mock.calls.at(-1)?.[0]), 'http://localhost').searchParams.get('month')!;
+  empty.sections.balance = { status: 'ready', data: { amount: '0.00', cutoff: empty.asOf } };
+  empty.sections.monthlySummary = { status: 'ready', data: { income: '0.00', expense: '0.00' } };
+  empty.sections.expenseDistribution = { status: 'ready', data: [] };
+  empty.sections.budgets = { status: 'ready', data: [] };
+  empty.sections.savingsGoals = { status: 'ready', data: [] };
+  await act(async () => { request.resolve(jsonResponse(empty)); });
+  expect(await screen.findByText('Tu historia financiera empieza aquí')).toBeVisible();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'Cerrar sesión' }));
+  expect(await screen.findByRole('heading', { name: 'Tu panel te espera' })).toBeVisible();
+  expect(screen.queryByText('Tu información está conectada')).not.toBeInTheDocument();
+});

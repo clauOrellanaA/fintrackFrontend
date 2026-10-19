@@ -74,4 +74,6 @@
   --color-chart-6: var(--palette-green-700);
   --color-chart-grid: var(--color-border);
   --color-chart-label: var(--color-text-secondary);
+  --color-shadow: rgb(72 38 150 / 0.13);
+  --color-skeleton: var(--palette-neutral-100);
 }
