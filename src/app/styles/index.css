@@ -1,0 +1,4 @@
+/* Importar una sola vez desde el futuro punto de entrada de React. */
+@import "./colors.css";
+@import "./typography.css";
+@import "./global.css";
