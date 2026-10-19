@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useMemo, useState, type FormEvent } from 'react';
 import { ArrowDownLeft, ArrowLeftRight, ArrowUpRight, CalendarDays, Check, ChevronLeft, ChevronRight, CircleAlert, ListFilter, Pencil, Plus, RefreshCw, Search, Tags, Trash2, X } from 'lucide-react';
 import { ApiError } from '../../shared/api/http';
 import { useSession } from '../../shared/session/SessionProvider';
 import { SignInPanel } from '../auth/SignInPanel';
 import { formatBobMoney } from '../../shared/formatters/money';
 import type { Category, Transaction, TransactionFilters, TransactionInput, TransactionType } from './api/contract';
-import { createCategory, createTransaction, deleteCategory, listCategories, updateCategory, updateTransaction, voidTransaction } from './api/transactions';
+import { useCategories } from './hooks/useCategories';
+import { useTransactionMutations } from './hooks/useTransactionMutations';
 import { useTransactions } from './hooks/useTransactions';
 import './transactions.css';
 
@@ -105,53 +106,52 @@ function MovementForm({ initial, categories, busy, onCancel, onSave }: {
   </div>;
 }
 
-function CategoryManager({ token, categories, onChanged, expire }: { token: string; categories: Category[]; onChanged(): void; expire(token: string): void }) {
+function CategoryManager({ categories, busy, onCreate, onRename, onRemove }: {
+  categories: Category[];
+  busy: boolean;
+  onCreate(name: string): Promise<unknown>;
+  onRename(id: string, name: string): Promise<unknown>;
+  onRemove(id: string): Promise<unknown>;
+}) {
   const [name, setName] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState('');
   const [deleting, setDeleting] = useState<Category | null>(null);
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function saveCategory(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) { setError('Escribe un nombre para la categoría.'); return; }
-    setBusy(true); setError(null);
+    setError(null);
     try {
-      await createCategory(token, trimmed);
+      await onCreate(trimmed);
       setName('');
-      onChanged();
     } catch (cause) {
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') expire(token);
       setError(errorMessage(cause, 'save'));
-    } finally { setBusy(false); }
+    }
   }
 
   async function renameCategory(event: FormEvent<HTMLFormElement>, id: string) {
     event.preventDefault();
-    setBusy(true); setError(null);
+    setError(null);
     try {
-      await updateCategory(token, id, editingName.trim());
+      await onRename(id, editingName.trim());
       setEditingId(null);
-      onChanged();
     } catch (cause) {
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') expire(token);
       setError(errorMessage(cause, 'save'));
-    } finally { setBusy(false); }
+    }
   }
 
   async function confirmDelete() {
     if (!deleting) return;
-    setBusy(true); setError(null);
+    setError(null);
     try {
-      await deleteCategory(token, deleting.id);
+      await onRemove(deleting.id);
       setDeleting(null);
-      onChanged();
     } catch (cause) {
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') expire(token);
       setError(errorMessage(cause, 'delete-category'));
-    } finally { setBusy(false); }
+    }
   }
 
   return <details className="category-manager">
@@ -180,31 +180,15 @@ function TransactionsContent() {
   const [applied, setApplied] = useState<TransactionFilters>({ status: 'posted', page: 1, pageSize: PAGE_SIZE });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<Transaction | null>(null);
-  const [mutationBusy, setMutationBusy] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [categoryError, setCategoryError] = useState<string | null>(null);
-  const [categoryAttempt, setCategoryAttempt] = useState(0);
   const filters = useMemo(() => applied, [applied]);
   const result = useTransactions(filters);
-
-  useEffect(() => {
-    if (!token) return;
-    const controller = new AbortController();
-    listCategories(token, controller.signal).then(values => {
-      if (!controller.signal.aborted) { setCategories(values); setCategoryError(null); }
-    }).catch(cause => {
-      if (controller.signal.aborted) return;
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') { expire(token); return; }
-      setCategoryError(errorMessage(cause, 'load'));
-    });
-    return () => controller.abort();
-  }, [token, categoryAttempt, expire]);
+  const categoriesResult = useCategories(token, expire, result.retry);
+  const categories = categoriesResult.categories;
+  const transactionMutations = useTransactionMutations(token, expire, result.retry);
 
   function refreshCategories() {
-    setCategoryError(null);
-    setCategoryAttempt(value => value + 1);
-    result.retry();
+    categoriesResult.retry();
   }
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
@@ -223,30 +207,20 @@ function TransactionsContent() {
   }
 
   async function saveMovement(value: TransactionInput) {
-    if (!token) return;
-    setMutationBusy(true); setActionError(null);
-    try {
-      if (editing) await updateTransaction(token, editing.id, value);
-      else await createTransaction(token, value);
-      setDialogOpen(false);
-      setEditing(null);
-      result.retry();
-    } catch (cause) {
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') expire(token);
-      throw cause;
-    } finally { setMutationBusy(false); }
+    setActionError(null);
+    await transactionMutations.save(value, editing?.id);
+    setDialogOpen(false);
+    setEditing(null);
   }
 
   async function removeMovement(transaction: Transaction) {
     if (!token || !window.confirm('¿Anular este movimiento? Se conservará en el historial y dejará de contar en el panel.')) return;
-    setMutationBusy(true); setActionError(null);
+    setActionError(null);
     try {
-      await voidTransaction(token, transaction.id);
-      result.retry();
+      await transactionMutations.voidMovement(transaction.id);
     } catch (cause) {
-      if (cause instanceof ApiError && cause.kind === 'unauthenticated') expire(token);
       setActionError(errorMessage(cause, 'void'));
-    } finally { setMutationBusy(false); }
+    }
   }
 
   const data = result.status === 'success' ? result.data : null;
@@ -254,8 +228,8 @@ function TransactionsContent() {
     <div className="page-heading"><div><p className="eyebrow">TU HISTORIAL FINANCIERO</p><h1>Movimientos</h1><p className="page-subtitle">Registra y organiza tus ingresos y gastos, a tu ritmo.</p></div><span className="heading-accent" aria-hidden="true"><ArrowLeftRight size={25} strokeWidth={1.5} /></span></div>
     {!token ? <SignInPanel /> : <>
       <div className="transaction-toolbar"><div><span className="transaction-toolbar__label"><CalendarDays size={16} />BOB · Bolivia</span><p>Los cambios actualizan también tu panel principal.</p></div><button className="button button--primary" type="button" onClick={() => { setEditing(null); setActionError(null); setDialogOpen(true); }}><Plus size={18} />Agregar movimiento</button></div>
-      <CategoryManager token={token} categories={categories} onChanged={refreshCategories} expire={expire} />
-      {categoryError && <p className="notice notice--danger" role="alert">{categoryError} <button className="text-button" type="button" onClick={refreshCategories}>Reintentar</button></p>}
+      <CategoryManager categories={categories} busy={categoriesResult.isMutating} onCreate={categoriesResult.create} onRename={categoriesResult.rename} onRemove={categoriesResult.remove} />
+      {categoriesResult.status === 'error' && <p className="notice notice--danger" role="alert">{errorMessage(categoriesResult.error, 'load')} <button className="text-button" type="button" onClick={refreshCategories}>Reintentar</button></p>}
       <form className="transaction-filters" onSubmit={applyFilters}>
         <div className="transaction-filters__heading"><div><ListFilter size={18} aria-hidden="true" /><h2>Buscar movimientos</h2></div><button className="button button--secondary transaction-refresh" type="button" onClick={result.retry} disabled={result.status === 'loading'} aria-label="Actualizar movimientos"><RefreshCw size={16} className={result.status === 'loading' ? 'spinning' : undefined} />Actualizar</button></div>
         <div className="transaction-filter-grid">
@@ -278,13 +252,13 @@ function TransactionsContent() {
             <span className="transaction-row__icon" aria-hidden="true">{transaction.type === 'income' ? <ArrowDownLeft size={19} /> : <ArrowUpRight size={19} />}</span>
             <div className="transaction-row__details"><div className="transaction-row__title"><strong>{transaction.description || (transaction.type === 'income' ? 'Ingreso' : 'Gasto')}</strong>{transaction.status === 'void' && <span className="transaction-status">Anulado</span>}</div><span>{transaction.categoryName ?? 'Sin categoría'} · <time dateTime={transaction.occurredAt}>{DATE_FORMATTER.format(new Date(transaction.occurredAt))}</time></span></div>
             <strong className="transaction-row__amount">{transaction.type === 'income' ? '+' : '−'}{formatBobMoney(transaction.amount)}</strong>
-            {transaction.status === 'posted' && <div className="transaction-row__actions"><button className="icon-button" type="button" aria-label={`Editar ${transaction.description || transaction.type}`} disabled={mutationBusy} onClick={() => { setEditing(transaction); setActionError(null); setDialogOpen(true); }}><Pencil size={16} /></button><button className="icon-button" type="button" aria-label={`Anular ${transaction.description || transaction.type}`} disabled={mutationBusy} onClick={() => void removeMovement(transaction)}><Trash2 size={16} /></button></div>}
+            {transaction.status === 'posted' && <div className="transaction-row__actions"><button className="icon-button" type="button" aria-label={`Editar ${transaction.description || transaction.type}`} disabled={transactionMutations.isMutating} onClick={() => { setEditing(transaction); setActionError(null); setDialogOpen(true); }}><Pencil size={16} /></button><button className="icon-button" type="button" aria-label={`Anular ${transaction.description || transaction.type}`} disabled={transactionMutations.isMutating} onClick={() => void removeMovement(transaction)}><Trash2 size={16} /></button></div>}
           </li>)}</ul>
           {data.totalPages > 1 && <nav className="transaction-pagination" aria-label="Paginación de movimientos"><button className="button button--secondary" type="button" disabled={applied.page <= 1 || result.status === 'loading'} onClick={() => setApplied(previous => ({ ...previous, page: previous.page - 1 }))}><ChevronLeft size={17} />Anterior</button><span>Página {data.page} de {data.totalPages}</span><button className="button button--secondary" type="button" disabled={data.page >= data.totalPages || result.status === 'loading'} onClick={() => setApplied(previous => ({ ...previous, page: previous.page + 1 }))}>Siguiente<ChevronRight size={17} /></button></nav>}
         </>}
       </section>
     </>}
-    {dialogOpen && <MovementForm initial={editing} categories={categories} busy={mutationBusy} onCancel={() => { setDialogOpen(false); setEditing(null); }} onSave={saveMovement} />}
+    {dialogOpen && <MovementForm initial={editing} categories={categories} busy={transactionMutations.isMutating} onCancel={() => { setDialogOpen(false); setEditing(null); }} onSave={saveMovement} />}
   </div>;
 }
 
