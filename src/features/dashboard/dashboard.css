@@ -111,6 +111,29 @@
 .budget-indicators__empty > svg { width: 65px; height: 65px; padding: 14px; border-radius: 50%; color: var(--color-primary); background: var(--color-surface-sidebar); margin-bottom: 18px; }
 .budget-indicators__empty strong { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); }
 .budget-indicators__empty p { max-width: 240px; margin: 7px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; text-transform: capitalize; }
+.savings-goals { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-surface); }
+.savings-goals h2 { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); letter-spacing: 0; }
+.savings-goals__count { color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.savings-goals__empty, .savings-goals--unavailable > p { margin: 10px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; }
+.savings-goals__list { display: grid; gap: 15px; list-style: none; margin: 15px 0 0; padding: 0; }
+.savings-goals__item { padding-top: 15px; border-top: 1px solid var(--color-border); }
+.savings-goals__item:first-child { padding-top: 0; border-top: 0; }
+.savings-goals__row { display: flex; align-items: baseline; justify-content: space-between; gap: 9px; }
+.savings-goals__row h3 { min-width: 0; margin: 0; font-size: var(--font-size-xs); overflow-wrap: anywhere; }
+.savings-goals__state { flex: 0 0 auto; padding: 3px 6px; border-radius: 6px; font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); }
+.savings-goals__item--active .savings-goals__state { color: var(--color-primary); background: var(--color-surface-sidebar); }
+.savings-goals__item--completed .savings-goals__state { color: var(--color-success); background: var(--color-success-background); }
+.savings-goals__item--overdue .savings-goals__state { color: var(--color-danger); background: var(--color-danger-background); }
+.savings-goals__amounts { display: flex; justify-content: space-between; gap: 9px; margin: 8px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.savings-goals__amounts strong { margin-left: 3px; color: var(--color-text); font-weight: var(--font-weight-medium); }
+.savings-goals__bar { height: 8px; margin-top: 10px; overflow: hidden; border-radius: 999px; background: var(--color-progress-track); }
+.savings-goals__bar > span { display: block; width: min(var(--goal-progress), 100%); height: 100%; border-radius: inherit; background: var(--color-goal-progress); }
+.savings-goals__item--completed .savings-goals__bar > span { background: var(--color-success); }
+.savings-goals__item--overdue .savings-goals__bar > span { background: var(--color-danger); }
+.savings-goals__footer { display: flex; align-items: center; justify-content: space-between; gap: 9px; margin-top: 7px; color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.savings-goals__footer > span:first-child, .savings-goals__date { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.savings-goals__footer strong { color: var(--color-text); font-weight: var(--font-weight-medium); }
+.savings-goals__date { margin: 7px 0 0; color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
 .empty-dashboard { display: flex; align-items: center; gap: 17px; padding: 20px; background: var(--color-surface-sidebar); border: 1px solid var(--color-border); border-radius: 15px; margin-bottom: 20px; }
 .empty-dashboard > svg { color: var(--color-primary); }
 .empty-dashboard h2 { margin: 0 0 5px; font-size: var(--font-size-sm); }
