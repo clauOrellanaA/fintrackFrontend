@@ -14,7 +14,7 @@ La CI verifica estructura, archivos obligatorios, ausencia de archivos .env rast
 
 Frontend ejecuta Vitest en el job application y Playwright en el job e2e. Este ultimo instala Chromium y sus dependencias de sistema, prueba las vistas desktop y mobile y conserva test-results/ durante siete dias si falla. Los E2E usan respuestas de API controladas: no requieren backend ni acreditan integracion con PostgreSQL. Para reproducirlos: npm ci, npx playwright install chromium y npm run test:e2e.
 
-React/Vite y NestJS ya tienen package.json y lockfile. Al implementar comportamiento de negocio, agregar pruebas pertinentes y su ejecucion en CI. No agregar verificaciones ficticias.
+El frontend ya incluye pruebas de comportamiento de negocio. Para validación opt-in contra una API aislada con dos cuentas sintéticas, consultar docs/integration.md y ejecutar npm run test:e2e:real con las variables del runner. Esa suite no forma parte de la CI ordinaria y requiere infraestructura disponible; los E2E controlados no la sustituyen.
 
 En GitHub, crear main, dev y qa y configurar proteccion para las tres ramas, revision de pull requests y los checks structure, application y e2e como obligatorios en frontend; structure y application en backend. Estas configuraciones requieren un remoto y permisos de administracion; los workflows no crean ramas ni activan protecciones.
 

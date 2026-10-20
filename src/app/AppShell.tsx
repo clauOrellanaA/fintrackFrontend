@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { ChartNoAxesCombined, CircleHelp, Flag, LayoutDashboard, LogOut, Menu, PiggyBank, ShieldCheck, Wallet, ArrowLeftRight } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useSession } from '../shared/session/SessionProvider';
@@ -21,6 +22,14 @@ function Navigation() {
 export function AppShell() {
   const { session, signOut } = useSession();
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+  const previousToken = useRef(session?.token);
+  useEffect(() => {
+    if (previousToken.current !== session?.token) {
+      previousToken.current = session?.token;
+      mainRef.current?.focus();
+    }
+  }, [session?.token]);
   const pageTitle = location.pathname.startsWith('/transactions') ? 'Movimientos' : location.pathname.startsWith('/budgets') ? 'Presupuestos' : 'Panel principal';
   return <div className="app-frame">
     <a className="skip-link" href="#main-content">Saltar al contenido</a>
@@ -37,7 +46,7 @@ export function AppShell() {
           <details className="mobile-menu"><summary aria-label="Abrir navegación"><Menu size={21} aria-hidden="true" /></summary><div className="mobile-menu-content"><Navigation /></div></details>
         </div>
       </header>
-      <main id="main-content" className="workspace-content" tabIndex={-1}><Outlet /></main>
+      <main ref={mainRef} id="main-content" className="workspace-content" tabIndex={-1}><Outlet /></main>
       <footer className="workspace-footer"><span>FinanTrack</span><span><ShieldCheck size={14} aria-hidden="true" />Tus finanzas, tu espacio.</span></footer>
     </div>
   </div>;
