@@ -1,5 +1,5 @@
 import { ChartNoAxesCombined, CircleHelp, Flag, LayoutDashboard, LogOut, Menu, PiggyBank, ShieldCheck, Wallet, ArrowLeftRight } from 'lucide-react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useSession } from '../shared/session/SessionProvider';
 
 function Brand() {
@@ -12,12 +12,15 @@ function Navigation() {
   return <nav aria-label="Navegación principal" className="main-nav">
     <span className="nav-label">TU ESPACIO</span>
     <NavLink to="/dashboard" className="nav-item"><LayoutDashboard size={18} aria-hidden="true" />Panel principal</NavLink>
-    {[{ name: 'Movimientos', icon: ArrowLeftRight }, { name: 'Presupuestos', icon: Wallet }, { name: 'Metas de ahorro', icon: Flag }, { name: 'Análisis', icon: ChartNoAxesCombined }].map(({ name, icon: Icon }) =>
+    <NavLink to="/transactions" className="nav-item"><ArrowLeftRight size={18} aria-hidden="true" />Movimientos</NavLink>
+    {[{ name: 'Presupuestos', icon: Wallet }, { name: 'Metas de ahorro', icon: Flag }, { name: 'Análisis', icon: ChartNoAxesCombined }].map(({ name, icon: Icon }) =>
       <span className="nav-item nav-item--upcoming" key={name} aria-disabled="true" title="Disponible próximamente"><Icon size={18} aria-hidden="true" />{name}<small>Pronto</small></span>)}
   </nav>;
 }
 export function AppShell() {
   const { session, signOut } = useSession();
+  const location = useLocation();
+  const pageTitle = location.pathname.startsWith('/transactions') ? 'Movimientos' : 'Panel principal';
   return <div className="app-frame">
     <a className="skip-link" href="#main-content">Saltar al contenido</a>
     <aside className="sidebar"><Brand /><Navigation />
@@ -25,7 +28,7 @@ export function AppShell() {
     </aside>
     <div className="workspace">
       <header className="topbar">
-        <div className="desktop-breadcrumb">Tu espacio<span>/</span><strong>Panel principal</strong></div>
+        <div className="desktop-breadcrumb">Tu espacio<span>/</span><strong>{pageTitle}</strong></div>
         <div className="mobile-brand"><Brand /></div>
         <div className="topbar-actions">
           {session ? <><span className="account" title={session.email}><span className="avatar" aria-hidden="true">{session.email[0].toUpperCase()}</span><span className="account-email">{session.email}</span></span><button className="icon-button" type="button" onClick={() => void signOut()} aria-label="Cerrar sesión" title="Cerrar sesión"><LogOut size={19} aria-hidden="true" /></button></>

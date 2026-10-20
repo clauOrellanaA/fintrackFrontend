@@ -1,12 +1,12 @@
 import type { ZodType } from 'zod';
 
-export type ApiErrorKind = 'network' | 'timeout' | 'unauthenticated' | 'validation' | 'server' | 'invalid-response' | 'configuration';
+export type ApiErrorKind = 'network' | 'timeout' | 'unauthenticated' | 'validation' | 'conflict' | 'not-found' | 'server' | 'invalid-response' | 'configuration';
 export class ApiError extends Error {
   constructor(public readonly kind: ApiErrorKind, public readonly status?: number) { super(kind); }
 }
 
 interface RequestOptions {
-  method?: 'GET' | 'POST' | 'DELETE';
+  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   token?: string;
   body?: unknown;
   signal?: AbortSignal;
@@ -31,7 +31,9 @@ async function request<T>(path: string, options: RequestOptions, consume: (respo
       cache: 'no-store', credentials: 'omit',
     });
     if (!response.ok) {
-      const kind = response.status === 401 ? 'unauthenticated' : response.status === 400 || response.status === 422 ? 'validation' : 'server';
+      const kind = response.status === 401 ? 'unauthenticated'
+        : response.status === 400 || response.status === 422 ? 'validation'
+          : response.status === 404 ? 'not-found' : response.status === 409 ? 'conflict' : 'server';
       throw new ApiError(kind, response.status);
     }
     return await consume(response);
