@@ -15,7 +15,8 @@ function Navigation() {
     <NavLink to="/dashboard" className="nav-item"><LayoutDashboard size={18} aria-hidden="true" />Panel principal</NavLink>
     <NavLink to="/transactions" className="nav-item"><ArrowLeftRight size={18} aria-hidden="true" />Movimientos</NavLink>
     <NavLink to="/budgets" className="nav-item"><Wallet size={18} aria-hidden="true" />Presupuestos</NavLink>
-    {[{ name: 'Metas de ahorro', icon: Flag }, { name: 'Análisis', icon: ChartNoAxesCombined }].map(({ name, icon: Icon }) =>
+    <NavLink to="/reports" className="nav-item"><ChartNoAxesCombined size={18} aria-hidden="true" />Análisis</NavLink>
+    {[{ name: 'Metas de ahorro', icon: Flag }].map(({ name, icon: Icon }) =>
       <span className="nav-item nav-item--upcoming" key={name} aria-disabled="true" title="Disponible próximamente"><Icon size={18} aria-hidden="true" />{name}<small>Pronto</small></span>)}
   </nav>;
 }
@@ -30,7 +31,7 @@ export function AppShell() {
       mainRef.current?.focus();
     }
   }, [session?.token]);
-  const pageTitle = location.pathname.startsWith('/transactions') ? 'Movimientos' : location.pathname.startsWith('/budgets') ? 'Presupuestos' : 'Panel principal';
+  const pageTitle = location.pathname.startsWith('/transactions') ? 'Movimientos' : location.pathname.startsWith('/budgets') ? 'Presupuestos' : location.pathname.startsWith('/reports') ? 'Análisis' : 'Panel principal';
   return <div className="app-frame">
     <a className="skip-link" href="#main-content">Saltar al contenido</a>
     <aside className="sidebar"><Brand /><Navigation />
