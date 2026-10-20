@@ -80,8 +80,8 @@ export function UserProfilePage() {
     setPasswordError(null);
     try {
       await changePassword(session.token, currentPassword, newPassword);
-      passwordChanged();
       navigate('/dashboard', { replace: true });
+      passwordChanged();
     } catch (error) {
       setPasswordError(errorMessage(error, 'password'));
     } finally {
