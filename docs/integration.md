@@ -13,12 +13,24 @@ El navegador consulta la API mediante HTTP/JSON; nunca accede directamente a Pos
 | Método y ruta relativa | Contrato consumido |
 | --- | --- |
 | `POST auth/login` | JSON `{ email, password }`; respuesta `{ accessToken, tokenType: "Bearer", expiresAt }`, con fecha ISO y zona explícita. El correo se normaliza con trim/minúsculas. |
+| `POST auth/register` | JSON `{ email, password, displayName }`; correo normalizado, contraseña de 12 a 1024 caracteres y nombre de 1 a 80. Devuelve una sesión activa y `Cache-Control: no-store`. |
+| `GET users/me` | Encabezado Bearer; devuelve correo, nombre visible (puede ser null en cuentas anteriores), saldo y fecha inicial, y moneda `BOB`. |
+| `PATCH users/me` | Encabezado Bearer; actualiza uno o más campos: `email`, `displayName`, `openingBalance` y `openingDate`. No permite modificar la moneda ni la identidad. |
+| `POST auth/password` | Encabezado Bearer y JSON `{ currentPassword, newPassword }`; contraseña nueva de 12 a 1024 caracteres. Devuelve 204 y revoca todas las sesiones. |
 | `DELETE auth/session` | Encabezado Bearer; cualquier respuesta HTTP satisfactoria confirma el cierre remoto. |
 | `GET dashboard?month=YYYY-MM` | Encabezado Bearer y respuesta agregada descrita abajo. |
 
 La sesión se conserva solo en memoria. Al recargar se solicita inicio de sesión. El vencimiento por `expiresAt` o un 401 del panel elimina la sesión; al cerrar sesión los datos desaparecen inmediatamente. Si la revocación remota falla, aparece un aviso de cierre no confirmado. Las consultas canceladas o de una sesión/mes anterior no sustituyen el resultado vigente. El foco vuelve al contenido principal cuando cambia la sesión.
 
 El cliente usa `credentials: omit`, `cache: no-store`, timeout de 10 segundos y validación Zod. Clasifica 400/422 como validación, 401 como sesión vencida, 404 como no encontrado, 409 como conflicto y el resto de errores HTTP como servidor. También distingue configuración ausente, red, timeout y respuesta inválida. No muestra cuerpos de error del servicio.
+
+## Registro, perfil y seguridad
+
+El registro es abierto y no requiere verificación por correo. Una cuenta nueva queda activa de inmediato con nombre visible, saldo inicial `0.00` BOB y fecha inicial correspondiente al día actual de `America/La_Paz`; la respuesta inicia sesión sin guardar el token en almacenamiento persistente. El formulario valida las contraseñas nuevas con un mínimo de 12 caracteres.
+
+La pantalla **Mi cuenta** permite editar el nombre, correo, importe inicial y su fecha. Los importes usan cadenas decimales exactas de dos posiciones. La moneda permanece fija en BOB. Cambiar el saldo modifica los saldos calculados, pero no altera movimientos; la fecha inicial no puede avanzar más allá de movimientos o metas ya existentes y la API responde 409 si el cambio invalidaría ese historial. Las cuentas anteriores pueden dejar el nombre vacío en el perfil hasta que lo completen.
+
+El cambio de contraseña exige la contraseña actual. Cuando el servicio confirma el cambio, el cliente borra inmediatamente su sesión en memoria y vuelve al acceso; la API revoca también todas las demás sesiones de esa cuenta. El contrato OpenAPI de estas rutas está versionado en `users.v1.json` en el repositorio backend.
 
 ## Respuesta del panel
 

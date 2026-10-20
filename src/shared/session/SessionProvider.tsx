@@ -1,13 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
-import { login, logout } from './api';
+import { login, logout, registerAccount } from './api';
 
 interface Session { token: string; email: string; expiresAt: string }
-type Notice = 'expired' | 'logout-unconfirmed' | null;
+type Notice = 'expired' | 'logout-unconfirmed' | 'password-changed' | null;
 interface SessionContextValue {
   session: Session | null;
   notice: Notice;
   signIn(email: string, password: string): Promise<void>;
+  signUp(email: string, password: string, displayName: string): Promise<void>;
   signOut(): Promise<void>;
+  updateEmail(email: string): void;
+  passwordChanged(): void;
   expire(token: string): void;
 }
 const SessionContext = createContext<SessionContextValue | null>(null);
@@ -18,6 +21,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const current = useRef<Session | null>(null);
   const generation = useRef(0);
   const pending = useRef<AbortController | null>(null);
+  function beginRequest() {
+    const version = ++generation.current;
+    pending.current?.abort();
+    const controller = new AbortController();
+    pending.current = controller;
+    current.current = null;
+    setSession(null);
+    setNotice(null);
+    return { version, controller };
+  }
+  function acceptSession(version: number, controller: AbortController, email: string, result: { accessToken: string; expiresAt: string }) {
+    if (generation.current !== version || controller.signal.aborted) return;
+    const next = { token: result.accessToken, email, expiresAt: result.expiresAt };
+    current.current = next;
+    setSession(next);
+  }
   const expire = useCallback((token: string) => {
     if (current.current?.token !== token) return;
     generation.current++;
@@ -26,18 +45,29 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     setNotice('expired');
   }, []);
   async function signIn(email: string, password: string) {
-    const version = ++generation.current;
-    pending.current?.abort();
-    const controller = new AbortController();
-    pending.current = controller;
-    current.current = null;
-    setSession(null);
-    setNotice(null);
+    const { version, controller } = beginRequest();
     const result = await login(email.trim().toLowerCase(), password, controller.signal);
-    if (generation.current !== version || controller.signal.aborted) return;
-    const next = { token: result.accessToken, email: email.trim().toLowerCase(), expiresAt: result.expiresAt };
+    acceptSession(version, controller, email.trim().toLowerCase(), result);
+  }
+  async function signUp(email: string, password: string, displayName: string) {
+    const { version, controller } = beginRequest();
+    const normalizedEmail = email.trim().toLowerCase();
+    const result = await registerAccount(normalizedEmail, password, displayName.trim(), controller.signal);
+    acceptSession(version, controller, normalizedEmail, result);
+  }
+  function updateEmail(email: string) {
+    const previous = current.current;
+    if (!previous) return;
+    const next = { ...previous, email };
     current.current = next;
     setSession(next);
+  }
+  function passwordChanged() {
+    generation.current++;
+    pending.current?.abort();
+    current.current = null;
+    setSession(null);
+    setNotice('password-changed');
   }
   async function signOut() {
     const previous = current.current;
@@ -56,7 +86,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [session, expire]);
   useEffect(() => () => { pending.current?.abort(); }, []);
-  return <SessionContext.Provider value={{ session, notice, signIn, signOut, expire }}>{children}</SessionContext.Provider>;
+  return <SessionContext.Provider value={{ session, notice, signIn, signUp, signOut, updateEmail, passwordChanged, expire }}>{children}</SessionContext.Provider>;
 }
 
 export function useSession() {
