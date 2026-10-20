@@ -56,6 +56,10 @@ def run_push_checks(project: Path) -> bool:
         (project / "src/features/transactions").rglob("*.test.tsx")
     ):
         patch_paths.append("src/features/transactions/TransactionsPage.tsx")
+    if list((project / "src/features/budgets").rglob("*.test.ts")) or list(
+        (project / "src/features/budgets").rglob("*.test.tsx")
+    ):
+        patch_paths.append("src/features/budgets/BudgetsPage.tsx")
     patch = "\n".join(
         ["*** Begin Patch", *(f"*** Update File: {path}" for path in patch_paths), "*** End Patch"]
     )
@@ -83,12 +87,12 @@ def run_push_checks(project: Path) -> bool:
     if result.returncode != 0:
         detail = (result.stderr or result.stdout).strip()
         print(
-            "⛔ Hook: las pruebas del dashboard y movimientos no aprobaron; push bloqueado.\n"
+            "⛔ Hook: las pruebas del dashboard, movimientos y presupuestos no aprobaron; push bloqueado.\n"
             + detail[-3000:],
             file=sys.stderr,
         )
         return False
-    print("✅ Hook: pruebas de módulos 1 y 2 aprobadas antes del push.", file=sys.stderr)
+    print("✅ Hook: pruebas de módulos 1, 2 y 3 aprobadas antes del push.", file=sys.stderr)
     return True
 
 
