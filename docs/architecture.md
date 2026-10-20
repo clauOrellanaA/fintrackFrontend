@@ -19,4 +19,4 @@ Las features no deben depender de detalles internos de otras features. Las opera
 
 El dinero se representara mediante decimales exactos en PostgreSQL y un contrato JSON explicito, evitando calculos monetarios con punto flotante. Moneda, zona horaria y reglas de redondeo se definiran antes de implementar.
 
-No hay autenticacion, autorizacion ni reglas financieras implementadas en esta etapa.
+El frontend implementa acceso mediante sesion Bearer en memoria y consume el contrato del panel. La autorizacion por usuario y las reglas financieras pertenecen a la API externa; el cierre de integracion real sigue pendiente. Consultar docs/integration.md y docs/fe-06-delivery.md.
