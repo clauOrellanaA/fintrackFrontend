@@ -3,6 +3,7 @@ import viteConfig from './vite.config.ts';
 
 export default mergeConfig(viteConfig, defineConfig({ test: {
   environment: 'jsdom', setupFiles: ['./src/test/setup.ts'],
+  environmentOptions: { jsdom: { url: 'http://localhost/' } },
   include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
   restoreMocks: true, unstubEnvs: true, unstubGlobals: true,
 } }));
