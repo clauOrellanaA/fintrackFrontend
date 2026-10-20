@@ -1,5 +1,7 @@
 # FinanTrack - frontend
 
+Despliegue: [guia de Render, variables y rutas SPA](docs/render-deployment.md).
+
 Sistema web para la gestion y el control de finanzas personales.
 
 Equipo **Cosa1ycosa2**: Luciana Salinas y Claudia Orellana.

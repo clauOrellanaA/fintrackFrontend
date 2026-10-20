@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: fintrack-web
+    runtime: static
+    branch: qa
+    autoDeployTrigger: checksPass
+    buildCommand: npm ci --include=dev && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: 24.21.0
+      - key: VITE_API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
