@@ -10,6 +10,13 @@
             "commandWindows": "py -3 .codex/hooks/proteger_archivos.py",
             "timeout": 10,
             "statusMessage": "Hook FinanTrack: protegiendo secretos y archivos locales..."
+          },
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/prohibir_tokens_persistentes.py",
+            "commandWindows": "py -3 .codex/hooks/prohibir_tokens_persistentes.py",
+            "timeout": 10,
+            "statusMessage": "Hook FinanTrack: evitando persistencia de credenciales..."
           }
         ]
       },

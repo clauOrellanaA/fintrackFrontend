@@ -30,7 +30,7 @@ paths = [
     if line.startswith(("*** Add File: ", "*** Update File: ", "*** Delete File: "))
 ]
 areas = []
-for area in ("src/features/dashboard", "src/features/transactions"):
+for area in ("src/features/dashboard", "src/features/transactions", "src/features/budgets"):
     if not any(path.startswith(f"{area}/") for path in paths):
         continue
     area_path = Path(event.get("cwd") or os.getcwd()).resolve()
