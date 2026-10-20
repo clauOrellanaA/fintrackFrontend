@@ -1,0 +1,35 @@
+/* Fuentes locales: no se descarga ninguna tipografia externa. */
+:root {
+  --font-family-body: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-heading: var(--font-family-body);
+  --font-family-mono: "Cascadia Code", Consolas, monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-xs: 0.75rem;
+  --font-size-2xs: 0.6875rem;
+  --font-size-brand-tag: 0.5rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+
+  --font-size-body: var(--font-size-md);
+  --font-size-label: var(--font-size-sm);
+  --font-size-caption: var(--font-size-xs);
+  --font-size-page-title: clamp(var(--font-size-2xl), 1.25rem + 1vw, var(--font-size-3xl));
+  --font-size-section-title: var(--font-size-xl);
+  --font-size-metric: clamp(var(--font-size-2xl), 1.25rem + 1vw, var(--font-size-3xl));
+
+  --line-height-tight: 1.2;
+  --line-height-heading: 1.3;
+  --line-height-body: 1.5;
+  --letter-spacing-heading: -0.025em;
+  --letter-spacing-body: 0;
+}

@@ -1,0 +1,79 @@
+/* Valores de color centralizados. Los componentes consumen los tokens semanticos. */
+:root {
+  --palette-white: #ffffff;
+  --palette-lavender-50: #f7f5ff;
+  --palette-lavender-100: #eee9ff;
+  --palette-lavender-200: #ddd4ff;
+  --palette-lavender-300: #c4b5fd;
+  --palette-violet-400: #a78bfa;
+  --palette-violet-500: #8b6cf0;
+  --palette-violet-600: #7045d9;
+  --palette-violet-700: #5b32bd;
+  --palette-violet-800: #482696;
+  --palette-neutral-50: #faf9fc;
+  --palette-neutral-100: #f1eff5;
+  --palette-neutral-200: #e4e0eb;
+  --palette-neutral-400: #a5a0b1;
+  --palette-neutral-500: #787181;
+  --palette-neutral-600: #625b6d;
+  --palette-neutral-900: #24202d;
+  --palette-green-50: #edf9f1;
+  --palette-green-700: #216b42;
+  --palette-red-50: #fff0f2;
+  --palette-red-700: #af2847;
+  --palette-amber-50: #fff7e6;
+  --palette-amber-800: #805400;
+  --palette-blue-50: #eef5ff;
+  --palette-blue-700: #2759a5;
+
+  --color-background: var(--palette-lavender-300);
+  --color-surface: var(--palette-white);
+  --color-surface-subtle: var(--palette-neutral-50);
+  --color-surface-sidebar: var(--palette-lavender-50);
+  --color-surface-hover: var(--palette-lavender-100);
+  --color-surface-selected: var(--palette-lavender-100);
+  --color-border: var(--palette-neutral-200);
+  --color-border-strong: var(--palette-neutral-500);
+  --color-text: var(--palette-neutral-900);
+  --color-text-secondary: var(--palette-neutral-600);
+  --color-text-muted: var(--palette-neutral-600);
+  --color-text-disabled: var(--palette-neutral-500);
+  --color-text-on-primary: var(--palette-white);
+  --color-primary: var(--palette-violet-600);
+  --color-primary-hover: var(--palette-violet-700);
+  --color-primary-active: var(--palette-violet-800);
+  --color-link: var(--palette-violet-700);
+  --color-focus-ring: var(--palette-violet-700);
+  --color-disabled-background: var(--palette-neutral-100);
+  --color-selection-background: var(--palette-lavender-200);
+  --color-selection-text: var(--palette-neutral-900);
+
+  --color-success: var(--palette-green-700);
+  --color-success-background: var(--palette-green-50);
+  --color-danger: var(--palette-red-700);
+  --color-danger-background: var(--palette-red-50);
+  --color-warning: var(--palette-amber-800);
+  --color-warning-background: var(--palette-amber-50);
+  --color-info: var(--palette-blue-700);
+  --color-info-background: var(--palette-blue-50);
+  --color-income: var(--color-success);
+  --color-expense: var(--color-danger);
+  --color-budget-warning: var(--color-warning);
+  --color-budget-exceeded: var(--color-danger);
+  --color-goal-progress: var(--color-primary);
+  --color-progress-track: var(--palette-lavender-100);
+
+  /* Graficos: acompanar siempre el color con etiquetas o leyendas. */
+  --color-chart-income: var(--palette-violet-500);
+  --color-chart-expense: var(--palette-lavender-300);
+  --color-chart-1: var(--palette-violet-500);
+  --color-chart-2: var(--palette-lavender-300);
+  --color-chart-3: var(--palette-violet-800);
+  --color-chart-4: var(--palette-neutral-500);
+  --color-chart-5: var(--palette-blue-700);
+  --color-chart-6: var(--palette-green-700);
+  --color-chart-grid: var(--color-border);
+  --color-chart-label: var(--color-text-secondary);
+  --color-shadow: rgb(72 38 150 / 0.13);
+  --color-skeleton: var(--palette-neutral-100);
+}

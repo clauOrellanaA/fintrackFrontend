@@ -1,0 +1,74 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/proteger_archivos.py",
+            "commandWindows": "py -3 .codex/hooks/proteger_archivos.py",
+            "timeout": 10,
+            "statusMessage": "Hook FinanTrack: protegiendo secretos y archivos locales..."
+          },
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/prohibir_tokens_persistentes.py",
+            "commandWindows": "py -3 .codex/hooks/prohibir_tokens_persistentes.py",
+            "timeout": 10,
+            "statusMessage": "Hook FinanTrack: evitando persistencia de credenciales..."
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/bloquear_comandos.py",
+            "commandWindows": "py -3 .codex/hooks/bloquear_comandos.py",
+            "timeout": 240,
+            "statusMessage": "Hook FinanTrack: revisando comando y pruebas antes del push..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/ejecutar_tests.py",
+            "commandWindows": "py -3 .codex/hooks/ejecutar_tests.py",
+            "timeout": 240,
+            "statusMessage": "Hook FinanTrack: ejecutando pruebas del modulo afectado..."
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/auditoria.py",
+            "commandWindows": "py -3 .codex/hooks/auditoria.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/auditoria.py",
+            "commandWindows": "py -3 .codex/hooks/auditoria.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
