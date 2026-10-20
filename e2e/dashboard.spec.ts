@@ -47,7 +47,7 @@ test('reference-inspired shell, period selection, private logout and responsive 
   await signIn(page);
   await expect(page.getByText('Tu información está conectada')).toBeVisible();
   await page.getByLabel('Mes consultado').fill('2026-02');
-  await expect(page.getByText(/febrero de 2026/)).toBeVisible();
+  await expect(page.getByRole('status').getByText(/febrero de 2026/)).toBeVisible();
   await expect(page.getByRole('button', { name: 'Actualizar panel' })).toBeEnabled();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   if (info.project.name === 'mobile') {
