@@ -19,6 +19,10 @@ El navegador consulta la API mediante HTTP/JSON; nunca accede directamente a Pos
 | `POST auth/password` | Encabezado Bearer y JSON `{ currentPassword, newPassword }`; contraseña nueva de 12 a 1024 caracteres. Devuelve 204 y revoca todas las sesiones. |
 | `DELETE auth/session` | Encabezado Bearer; cualquier respuesta HTTP satisfactoria confirma el cierre remoto. |
 | `GET dashboard?month=YYYY-MM` | Encabezado Bearer y respuesta agregada descrita abajo. |
+| `GET savings-goals` | Lista las metas del usuario, incluidas las archivadas, con objetivo, acumulado, restante, progreso y estado. |
+| `POST savings-goals` | Crea una meta con nombre, objetivo BOB y fecha objetivo opcional. |
+| `PATCH savings-goals/:id` | Edita la meta o cambia `archived`; no existe borrado destructivo. |
+| `POST savings-goals/:id/entries` | Registra un aporte o retiro append-only y devuelve la meta actualizada. |
 
 La sesión se conserva solo en memoria. Al recargar se solicita inicio de sesión. El vencimiento por `expiresAt` o un 401 del panel elimina la sesión; al cerrar sesión los datos desaparecen inmediatamente. Si la revocación remota falla, aparece un aviso de cierre no confirmado. Las consultas canceladas o de una sesión/mes anterior no sustituyen el resultado vigente. El foco vuelve al contenido principal cuando cambia la sesión.
 
@@ -52,7 +56,7 @@ Los importes llegan como cadenas decimales con dos posiciones y hasta doce dígi
 
 Sin sesión se muestra el formulario de acceso. Con sesión se consulta el mes actual de Bolivia, se puede cambiar el mes o actualizar. La carga tiene anuncio accesible y esqueletos; los errores ofrecen reintento. Una respuesta válida muestra mes y corte, saldo, ingresos/gastos, distribución, presupuestos y metas. Cada tarjeta distingue datos disponibles, lista vacía y sección no disponible; un panel totalmente vacío requiere las cinco secciones disponibles, importes cero y listas vacías. `notAvailable` no equivale a cero.
 
-Los indicadores incluyen texto y alternativas accesibles, además de color. Las metas y presupuestos muestran montos, progreso y estado. El diseño móvil adapta las tarjetas a una columna y permite importes/nombres largos; los E2E controlados incluyen 320 px. Las rutas de transacciones/presupuestos y sus operaciones son features separadas; FE-06 no amplía sus contratos.
+Los indicadores incluyen texto y alternativas accesibles, además de color. Las metas y presupuestos muestran montos, progreso y estado. El diseño móvil adapta las tarjetas a una columna y permite importes/nombres largos; los E2E controlados incluyen 320 px. Las rutas de transacciones/presupuestos y sus operaciones son features separadas. La pantalla de gestión de metas y sus estados están documentados en [FE-07](fe-07-savings-goals.md); FE-06 conserva únicamente el contrato de indicadores del dashboard.
 
 ## Verificación controlada y real
 
