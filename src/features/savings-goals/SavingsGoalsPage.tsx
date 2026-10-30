@@ -84,7 +84,7 @@ function GoalCard({ goal, busy, onEdit, onEntry, onArchive }: { goal: SavingsGoa
   </article>;
 }
 
-export function SavingsGoalsPage() {
+function SavingsGoalsContent() {
   const { session } = useSession();
   const goals = useSavingsGoals();
   const [goalForm, setGoalForm] = useState<SavingsGoal | null | undefined>(undefined);
@@ -107,4 +107,9 @@ export function SavingsGoalsPage() {
     {goalForm !== undefined && <GoalForm key={goalForm?.id ?? 'new-goal'} initial={goalForm} busy={goals.isMutating} onCancel={() => setGoalForm(undefined)} onSave={saveGoal} />}
     {entry && <EntryForm key={`${entry.goal.id}-${entry.type}`} goal={entry.goal} type={entry.type} busy={goals.isMutating} onCancel={() => setEntry(null)} onSave={saveEntry} />}
   </section>;
+}
+
+export function SavingsGoalsPage() {
+  const { session } = useSession();
+  return session ? <SavingsGoalsContent key={session.token} /> : <SignInPanel />;
 }

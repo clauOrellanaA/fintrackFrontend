@@ -39,3 +39,16 @@ Base auditada: 6f4679e; fecha: 2026-10-29.
 ## Pendiente y cierre
 Ejecutar y vincular evidencia por RF sin reutilizar conteos históricos como resultado actual.
 Consultar [tareas](tasks.md); cerrar integración solo con evidencia externa disponible.
+
+## Mapa de integración preparado en FE-SDD-02
+
+Datos de aceptación sintéticos propuestos para el operador, sin ejecutar API real. La UI debe mostrar el valor recibido; estas cifras no se calculan en el navegador.
+
+| RF | Datos sintéticos esperados | Comprobación UI | Evidencia externa necesaria |
+| --- | --- | --- | --- |
+| RF-M1-01 | `amount: "-125.50"`, corte `2026-10-30T12:00:00-04:00` igual a asOf; otro caso `0.00` | Saldo exacto en BOB, signo y corte, separado del resultado mensual | Saldo inicial, movimientos vigentes y reservas de metas producen ese saldo; anulados excluidos; persiste tras reinicio |
+| RF-M1-02 | Mes 2026-10, `income: "1200.00"`, `expense: "1500.00"`; otro mes sin actividad ambos `0.00` | Ingreso y gasto separados del mismo período, sin sustituirlos por neto | Límites de mes Bolivia e inclusión/exclusión de movimientos en ambos extremos |
+| RF-M1-03 | Dos categorías `100.00/33.33` y `200.00/66.67`; otra consulta lista vacía | Importe y porcentaje recibidos en gráfico y alternativa textual; vacío distinguido de notAvailable | Agregación por categoría y redondeo; categorías eliminadas/sin categoría; mismo período que resumen |
+| RF-M1-04 | Presupuestos `79.99 normal`, `80.00 warning`, `100.00 warning`, `100.01 exceeded`; metas activa sin fecha, completada con progreso 120.00 y vencida | Etiquetas del servicio, importes exactos, porcentaje completo en texto y barra contenida; listas vacías | Cálculo de consumo/umbrales, efecto de aportes/retiros sobre saldo, vencimiento Bolivia y propiedad por cuenta |
+
+Recorrer el conjunto con A y B de datos distintos; cerrar sesión y comprobar limpieza. El runner real compara UI y API; los cálculos esperados y la persistencia requieren además resultados del servicio. Ver [traspaso](../../sdd/service-handoff.md). Sin configuración de cuentas/API aislada no se marca M1-T4/T5.

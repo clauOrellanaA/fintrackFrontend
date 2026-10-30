@@ -18,10 +18,11 @@ function errorMessage(error: unknown, context: 'load-profile' | 'save-profile' |
   return context === 'save-profile' ? 'No pudimos guardar los cambios. Vuelve a intentarlo.' : 'No pudimos actualizar la contraseña. Vuelve a intentarlo.';
 }
 
-export function UserProfilePage() {
+function UserProfileContent() {
   const { session, expire, updateEmail, passwordChanged } = useSession();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [requiresDisplayName, setRequiresDisplayName] = useState(false);
   const [loading, setLoading] = useState(true);
   const [savingProfile, setSavingProfile] = useState(false);
   const [savingPassword, setSavingPassword] = useState(false);
@@ -39,9 +40,13 @@ export function UserProfilePage() {
     setProfile(null);
     setProfileError(null);
     getProfile(session.token, controller.signal)
-      .then(setProfile)
+      .then(result => {
+        if (controller.signal.aborted) return;
+        setProfile(result);
+        setRequiresDisplayName(Boolean(result.displayName?.trim()));
+      })
       .catch(error => {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
+        if (controller.signal.aborted || (error instanceof DOMException && error.name === 'AbortError')) return;
         if (error instanceof ApiError && error.kind === 'unauthenticated') expire(session.token);
         else setProfileError(errorMessage(error, 'load-profile'));
       })
@@ -52,18 +57,24 @@ export function UserProfilePage() {
   async function saveProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!session || !profile) return;
+    const displayName = profile.displayName?.trim() ?? '';
+    if (requiresDisplayName && !displayName) {
+      setProfileError('Ingresa un nombre visible para tu perfil.');
+      return;
+    }
     setSavingProfile(true);
     setProfileError(null);
     setProfileSaved(false);
     try {
       const result = await updateProfile(session.token, {
         email: profile.email,
-        displayName: profile.displayName?.trim() ?? '',
+        ...(displayName ? { displayName } : {}),
         openingBalance: profile.openingBalance,
         openingDate: profile.openingDate,
       });
+      if (!updateEmail(session.token, result.email)) return;
       setProfile(result);
-      updateEmail(result.email);
+      setRequiresDisplayName(Boolean(result.displayName?.trim()));
       setProfileSaved(true);
     } catch (error) {
       if (error instanceof ApiError && error.kind === 'unauthenticated') expire(session.token);
@@ -80,8 +91,7 @@ export function UserProfilePage() {
     setPasswordError(null);
     try {
       await changePassword(session.token, currentPassword, newPassword);
-      navigate('/dashboard', { replace: true });
-      passwordChanged();
+      if (passwordChanged(session.token)) navigate('/dashboard', { replace: true });
     } catch (error) {
       setPasswordError(errorMessage(error, 'password'));
     } finally {
@@ -100,7 +110,7 @@ export function UserProfilePage() {
         <div className="account-panel__heading"><div><p className="eyebrow">INFORMACIÓN PERSONAL</p><h2 id="profile-heading">Tu perfil</h2></div></div>
         <form className="account-form" onSubmit={event => void saveProfile(event)}>
           <div className="account-form__grid">
-            <div><label htmlFor="profile-name">Nombre visible</label><input id="profile-name" autoComplete="name" required maxLength={80} value={profile.displayName ?? ''} onChange={event => { setProfile({ ...profile, displayName: event.target.value }); setProfileSaved(false); }} disabled={savingProfile} /></div>
+            <div><label htmlFor="profile-name">Nombre visible</label><input id="profile-name" autoComplete="name" required={requiresDisplayName} maxLength={80} value={profile.displayName ?? ''} onChange={event => { setProfile({ ...profile, displayName: event.target.value }); setProfileSaved(false); }} disabled={savingProfile} /></div>
             <div><label htmlFor="profile-email">Correo electrónico</label><input id="profile-email" type="email" autoComplete="email" required maxLength={254} value={profile.email} onChange={event => { setProfile({ ...profile, email: event.target.value }); setProfileSaved(false); }} disabled={savingProfile} /></div>
             <div><label htmlFor="opening-balance">Saldo inicial (BOB)</label><input id="opening-balance" inputMode="decimal" required value={profile.openingBalance} onChange={event => { setProfile({ ...profile, openingBalance: event.target.value }); setProfileSaved(false); }} disabled={savingProfile} /></div>
             <div><label htmlFor="opening-date">Fecha del saldo inicial</label><input id="opening-date" type="date" required value={profile.openingDate} onChange={event => { setProfile({ ...profile, openingDate: event.target.value }); setProfileSaved(false); }} disabled={savingProfile} /></div>
@@ -126,4 +136,9 @@ export function UserProfilePage() {
       </section>
     </>}
   </div>;
+}
+
+export function UserProfilePage() {
+  const { session } = useSession();
+  return session ? <UserProfileContent key={session.token} /> : <div className="account-page"><div className="page-heading"><div><p className="eyebrow">TU CUENTA</p><h1>Tu perfil.</h1></div></div><SignInPanel /></div>;
 }

@@ -1,30 +1,29 @@
-# Plan de trabajo pendiente
+﻿# Plan de trabajo y pendientes
 
-No se planifica reconstruir capacidades presentes. Orden recomendado: cobertura local → contrato de notificaciones → interfaz de notificaciones → validación integrada. Estas tareas quedan por ejecutar; esta entrega redacta documentación.
+Actualizado en FE-SDD-02, 2026-10-30, sobre `e9e6bd4` más el diff del worktree. Se conservan las capacidades presentes. La evidencia vigente está en [verificación](verification.md); las casillas de cada módulo distinguen cierre local y dependencia externa.
 
-| Orden | Entrega | RF | Dependencia | Aceptación |
-| --- | --- | --- | --- | --- |
-| 1 | Cubrir gestión de metas | RF-M5-01/02/03 | Código actual | Tests de crear/editar/aportar/retirar/archivar, errores y cambio de sesión |
-| 2 | Completar cobertura de movimientos y límites | RF-M2-01/03/04, RF-M3-04 | Fixtures controlados | Pruebas de UI, filtros/fechas y 79.99/80/100/>100 sin recomputar estados financieros |
-| 3 | Contrastar perfil y ampliar seguridad verificable | RF-M6-02/03/04 | Contrato externo de cuenta | Decisión documentada sobre nombre, pruebas de sesión y evidencia externa separada |
-| 4 | Acordar contrato de notificaciones | RF-M5-04, RF-N-01..05 | Sesión del servicio correspondiente | Ejemplos, errores, propiedad, deduplicación y persistencia confirmados |
-| 5 | Construir bandeja de notificaciones | RF-M5-04, RF-N-01..05 | Contrato anterior disponible | Listar, diferenciar leídas, marcar lectura, vacíos/error/reintento y limpieza de sesión |
-| 6 | Cerrar integración de los seis módulos | Todos RF de cada flujo | API aislada y cuentas sintéticas | Resultados reales por RF sin usar producción ni administrar otra capa aquí |
+| Entrega | Estado FE-SDD-02 | Próximo paso |
+| --- | --- | --- |
+| Gestión de metas RF-M5-01/02/03 | Cobertura propia añadida y privacidad por sesión corregida | QA local aprobada; contrastar operaciones con API aislada |
+| Movimientos y presupuestos RF-M2-*, RF-M3-* | Pruebas de pantalla/hooks ampliadas; presupuesto sin mes y formularios entre sesiones corregidos | QA local aprobada; validar cálculos/mutaciones reales |
+| Perfil y sesión RF-M6-* | Confirmaciones antiguas protegidas por token; compatibilidad local de nombre vacío; pruebas de errores/expiración/cierre | Confirmación externa de perfil antiguo, hash, revocación y acceso cruzado |
+| Panel e informes RF-M1-*, RF-M4-* | Mapas sintéticos de integración preparados; Actualizar informes con mismo rango corregido | QA controlada aprobada; ejecutar recorridos reales |
+| Contrato de notificaciones RF-M5-04, RF-N-* | Propuesta y traspaso preparados, sin confirmación del servicio | Entregar [solicitud](service-handoff.md) en la sesión del servicio y recibir contrato versionado |
+| Bandeja de notificaciones | Sin implementación, dependiente del contrato anterior | Escribir pruebas e implementar lista/lectura/paginación una vez confirmado |
+| Integración de los seis módulos | Pendiente | API aislada, dos cuentas sintéticas, dataset y resultados reales por RF |
 
-Detalles de tareas de 20–30 minutos: `docs/specs/001-panel/tasks.md` a `007-notificaciones/tasks.md`. Un fallo descubierto requiere su propia corrección acotada; no se da por reparado por aparecer en esta lista.
+Las tareas de 20–30 minutos se conservan en `docs/specs/001-panel/tasks.md` a `007-notificaciones/tasks.md`. Una prueba controlada no cierra un requisito de persistencia o autorización del servidor.
 
-## Decisiones recomendadas para lo ausente
+## Decisiones recomendadas para notificaciones
 
-**RECOMENDACIÓN, todavía no implementada:** notificaciones persistidas dentro de la aplicación, con estado leído/no leído. Avisar de presupuesto que llega al 80 %, presupuesto que supera 100 %, meta completada y meta vencida sin completar. El servidor determina estos estados y evita duplicados; la UI no infiere eventos de sus porcentajes.
+**Propuesta, todavía sin implementar ni confirmar:** bandeja persistida con estado leído/no leído; avisos de presupuesto al 80 % y al superar 100 %, meta completada y meta vencida sin completar. El servicio determina estados y evita duplicados; el cliente no infiere eventos desde porcentajes del panel.
 
-Una notificación de presupuesto por tipo, presupuesto y mes; una de meta por tipo y meta en el MVP. Reabrir una meta o editarla no genera otra alerta del mismo tipo en esta primera versión. Si pasa directamente de menos de 80 % a más de 100 %, emitir únicamente la alerta de exceso para ese cambio. Las alertas ya generadas permanecen como historial. Fechas en America/La_Paz. Estas decisiones deben constar en el contrato entregado por la otra sesión.
+Una notificación por usuario/presupuesto/mes/tipo y por usuario/meta/tipo en el MVP. Reabrir o editar una meta no vuelve a emitir el mismo tipo. Un salto directo desde menos de 80 % a más de 100 % genera únicamente exceso para ese cambio. Conservar avisos históricos y calendario `America/La_Paz`.
 
-Sin correo, push, SMS, tareas en segundo plano del navegador ni tiempo real. Cargar al entrar en la bandeja y al actualizar manualmente; no introducir polling ni websocket para el MVP.
+Sin correo, push, SMS, tareas del navegador en segundo plano ni tiempo real. Consultar al entrar, actualizar manualmente y paginar; sin polling o websocket. Confirmar estas decisiones en el contrato externo antes de consumir las rutas propuestas.
 
-## Traspaso externo
+## Dependencias concretas
 
-Entregar [el plan de notificaciones](../specs/007-notificaciones/plan.md) a una sesión del servicio. Allí se confirmará o ajustará el contrato; esta sesión no inspecciona ni modifica el repositorio hermano.
+El [traspaso al servicio](service-handoff.md) reúne rutas, ejemplos, errores y aceptación de generación/deduplicación/lectura, junto con los casos de seguridad y el entorno de integración. Preparar este documento no demuestra recepción ni ejecución por otra sesión.
 
-Para cerrar seguridad y datos, solicitar resultados sobre hash seguro, revocación, rechazo de accesos cruzados y persistencia tras reinicio. Para mutaciones, solicitar entorno aislado con dos cuentas y datos sintéticos; el runner real actual cubre solo lectura del panel.
-
-La disponibilidad actual de esa infraestructura no se ha comprobado en esta entrega. Existe evidencia histórica de integración pendiente; no se afirma una caída actual del servicio.
+Se comprobó que las seis variables `FINTRACK_TEST_*` del runner real no están configuradas. No se ejecutó API real ni se administró la otra capa. El runner disponible solo cubre lectura del panel; gestión, informes, notificaciones, persistencia y rechazo de escrituras ajenas necesitan evidencia adicional. La disponibilidad actual del servicio no se ha consultado.

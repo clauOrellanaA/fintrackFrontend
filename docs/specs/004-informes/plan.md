@@ -39,3 +39,18 @@ Base auditada: 6f4679e; fecha: 2026-10-29.
 ## Pendiente y cierre
 Consultar [tareas](tasks.md); no declarar exactitud de agregados por fixtures controlados.
 Solicitar comprobaciones externas de fechas de corte, inclusión del último día y persistencia.
+
+## Matriz de datos de cierre preparada en FE-SDD-02
+
+Escenarios sintéticos para la validación integrada futura; preparar el dataset en la sesión del servicio. No son resultados de una API ejecutada. El frontend presenta los agregados recibidos.
+
+| Escenario | Entrada y respuesta esperada | Comprobación |
+| --- | --- | --- |
+| Vacío | `from=2026-10-01`, `to=2026-10-31`; income/expense/net `0.00`, distribuciones y evolución vacías | Vacío con métricas cero y alternativas sin filas inventadas; distinto de fallo HTTP |
+| Neto negativo | Mismo período, income `100.00`, expense `150.00`, net `-50.00`; gasto de categoría `150.00/100.00` | Valores BOB exactos y signo negativo; no recalcular neto en UI |
+| Un día | `from=to=2026-10-30`; inicio `2026-10-30T00:00:00-04:00`, fin exclusivo `2026-10-31T00:00:00-04:00` | El servicio incluye el último instante de ese día y excluye el siguiente; respuesta coincide con fechas solicitadas |
+| Cambio de año | `from=2025-12-31`, `to=2026-01-01`; meses 2025-12 y 2026-01 con balances sintéticos `100.00` y `-50.00` | Ambas filas y cortes legibles, sin desplazar día/mes por zona del dispositivo |
+| 24 meses | `from=2025-01-01`, `to=2026-12-31` | 24 meses calendario inclusivos aceptados; tabla mantiene valores de cada mes recibidos |
+| Más de 24 meses | `from=2024-12-31`, `to=2026-12-31` | Rechazo local antes de nueva solicitud; no reemplazar el último informe con datos ficticios |
+
+Para cada caso, comparar respuesta del servicio con UI y con valores esperados del dataset. Confirmar cortes/inclusión del último día, propiedad y persistencia externamente. La suite real actual solo cubre panel; M4-T4/T5 requieren un recorrido propio de informes. Ver [traspaso](../../sdd/service-handoff.md).

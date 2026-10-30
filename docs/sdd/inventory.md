@@ -1,6 +1,6 @@
 # Inventario de capacidades solicitado
 
-Base inspeccionada: `6f4679e62dac6bfd067ca4472413f5dccff8f39d`, 2026-10-29. Alcance: frontend de este repositorio. “Presente” significa encontrado en código; no certifica ejecución ni integración del servicio.
+Base de FE-SDD-02: `e9e6bd4d3c9a36c02d3e7e41cc58a9a2c5d01983` más el diff del worktree `fe-sdd-02-spec-completion`, 2026-10-30. La línea base documental anterior inspeccionó `6f4679e` el 2026-10-29. “Presente” describe implementación; los resultados ejecutados y sus límites se registran en [verificación](verification.md). No certifica integración del servicio.
 
 | Módulo / RF | Capacidad solicitada | Estado observado | Evidencia principal |
 | --- | --- | --- | --- |
@@ -29,13 +29,15 @@ Base inspeccionada: `6f4679e62dac6bfd067ca4472413f5dccff8f39d`, 2026-10-29. Alca
 | RF-M6-03 | Protección de contraseñas | Parcial verificable en cliente | Campo protegido, cambio y sesión en memoria; hash requiere evidencia externa |
 | RF-M6-04 | Datos financieros propios | Parcial verificable en cliente | Bearer y limpieza por sesión; autorización y aislamiento requieren API real |
 
-Rutas completas, contratos y pruebas candidatas están en los planes de cada módulo. No crear de nuevo CRUD, filtros, informes o metas por ausencia de una spec anterior.
+Rutas completas, contratos y pruebas están en los planes de cada módulo y en la matriz vigente de verificación. No crear de nuevo CRUD, filtros, informes o metas por ausencia de una spec anterior.
 
-## Deuda documental observada
+## Actualización FE-SDD-02
 
-- `architecture.md` conservaba moneda/zona como pendientes; esta entrega actualiza esa afirmación según los contratos locales.
-- `integration.md` describe la posibilidad de dejar el nombre del perfil vacío en cuentas anteriores; el formulario actual exige nombre. Conservar esta discrepancia como pendiente de contraste, sin atribuir al servidor un comportamiento no observado.
-- `fe-m02-hooks.md` y documentos de entregas contienen firmas o conteos históricos. Consultar el código de esta base antes de usar esas firmas como contrato actual.
-- La gestión de metas no tiene tests propios en esta base. Las pruebas de indicadores del panel no cubren crear/aportar/retirar/archivar.
+- Metas dispone de pruebas propias de creación, edición, aportes/retiros, archivo/restauración, errores y sesión; las tarjetas del panel ya no son su única cobertura.
+- Movimientos añade pruebas de pantalla y `useTransactions`: validaciones, categorías, filtros/paginación, carga/vacío/error y respuestas tardías.
+- Presupuestos cubre límites/categorías, estados recibidos 79,99/80/100/>100, cancelación/fallo de eliminación, mes vacío y cambio de sesión.
+- Cuenta añade regresiones de respuestas tardías de perfil/contraseña y pruebas del proveedor de sesión. El nombre legado vacío se conserva omitiéndolo del PATCH parcial; el contraste con el servicio sigue pendiente.
+- Las correcciones desmontan formularios privados por token e impiden que una confirmación de la cuenta anterior cambie o cierre la nueva sesión. Informes vuelve a consultar al actualizar sin cambiar fechas.
+- La ejecución final de estas comprobaciones se registra en [verificación](verification.md); los documentos de entregas anteriores conservan sus firmas y conteos históricos.
 
-Las dependencias de persistencia, hash y autorización se solicitan a otra sesión. El backlog compartido informa entregas previas del servidor; no sustituye evidencia de integración en esta base frontend.
+Notificaciones no tiene contrato confirmado ni implementación. La [solicitud al servicio](service-handoff.md) está preparada, sin afirmar que otra sesión la haya recibido. Persistencia, hash, revocación global, cálculos y autorización del servidor requieren evidencia externa. Las seis variables del runner real estaban ausentes; no se consultó la API ni se afirma que el servicio esté caído.
