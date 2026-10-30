@@ -117,7 +117,7 @@ function BudgetCard({ budget, month, onEdit, onDelete }: { budget: Budget; month
   </article>;
 }
 
-export function BudgetsPage() {
+function BudgetsContent() {
   const { session, expire } = useSession();
   const [month, setMonth] = useState(currentMonth);
   const [dialogBudget, setDialogBudget] = useState<Budget | null | undefined>(undefined);
@@ -159,7 +159,7 @@ export function BudgetsPage() {
     </header>
 
     <div className="budgets-toolbar">
-      <label className="budget-month" htmlFor="budgets-month"><span>Período</span><input id="budgets-month" type="month" min="1900-01" max="9998-12" value={month} onChange={event => setMonth(event.target.value)} /></label>
+      <label className="budget-month" htmlFor="budgets-month"><span>Período</span><input id="budgets-month" type="month" min="1900-01" max="9998-12" value={month} onChange={event => { if (/^\d{4}-(0[1-9]|1[0-2])$/.test(event.target.value)) setMonth(event.target.value); }} /></label>
       <div className="budgets-toolbar__actions">
         <Link className="button button--secondary" to="/transactions">Ver movimientos</Link>
         <button className="button button--primary" type="button" onClick={() => setDialogBudget(null)} disabled={!canCreate || categories.isMutating}><Plus size={17} aria-hidden="true" />Nuevo presupuesto</button>
@@ -189,4 +189,9 @@ export function BudgetsPage() {
       </section>
     </div>}
   </section>;
+}
+
+export function BudgetsPage() {
+  const { session } = useSession();
+  return session ? <BudgetsContent key={session.token} /> : <SignInPanel />;
 }

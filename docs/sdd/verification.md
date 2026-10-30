@@ -1,4 +1,74 @@
-# Verificación y trazabilidad SDD
+﻿# Verificación y trazabilidad SDD
+
+## FE-SDD-02 · Correcciones y cobertura local
+
+Fecha: 2026-10-30. Base `e9e6bd4d3c9a36c02d3e7e41cc58a9a2c5d01983` más el diff del worktree `C:/fintrack/worktrees/frontend/fe-sdd-02-spec-completion`. Rama `fix/fe-sdd-02-spec-completion`; coordinador único responsable de Git. Esta identificación describe la versión de trabajo comprobada, sin atribuirla a un commit futuro.
+
+Se corrigieron formularios privados persistentes entre sesiones en presupuestos/metas/perfil, confirmaciones tardías de cuenta que afectaban otra sesión, selector mensual vacío y reconsulta de informes con el mismo intervalo. La compatibilidad local de perfil antiguo usa el PATCH parcial omitiendo un nombre vacío. El test de cambio de contraseña espera el aviso visible en la ruta final con una consulta fresca.
+
+Las regresiones se escribieron y ejecutaron antes de corregir producción: seis fallos en metas/presupuestos y cuatro en cuenta/informes. La primera revisión independiente de los cinco archivos de producción no encontró defectos bloqueantes. Estos resultados focalizados no sustituyen la validación final de todo el diff.
+
+### Comandos y resultados de la versión final
+
+QA independiente sobre código y pruebas finales: Node 24.15.0, npm 11.12.1.
+
+| Comando | Resultado |
+| --- | --- |
+| `npm run lint` | Aprobado, exit 0 |
+| `npm run typecheck` | Aprobado, exit 0 |
+| `npm test` | 98/98 pruebas, 24 archivos, exit 0 |
+| `npm run build` | Aprobado, exit 0 |
+| `npm run test:e2e` | 24/24 Chromium escritorio/móvil, exit 0 |
+| `git diff --check` | Aprobado, exit 0 |
+
+Los E2E incluyen teclado, skip link, 320 px, importes extremos, informes, contraseñas, mes vacío y creación/archivo/restauración de metas. Usan HTTP sintético; no acreditan API real. Capturas generadas conservadas localmente, fuera del commit.
+
+Revisión independiente de producción y tests sin hallazgos bloqueantes. El aviso de contraseña conserva la comprobación de visibilidad y espera la ruta final. El coordinador completó y comprobó la documentación tras agotarse la capacidad de los especialistas; no se atribuye revisión independiente final a esos cambios documentales.
+
+### Matriz vigente de cobertura
+
+Los archivos indicados contienen pruebas controladas con datos sintéticos. Resultado final local: Vitest 98/98 y Playwright 24/24 aprobados; los requisitos sin implementación o dependientes de evidencia externa conservan su estado pendiente. La matriz histórica inferior corresponde únicamente a su propia base documental.
+
+| RF | Prueba / recorrido local | Alcance externo que sigue pendiente |
+| --- | --- | --- |
+| RF-M1-01 | `dashboard/components/BalanceCard.test.tsx`, `shared/formatters/money.test.ts`, E2E panel | Cálculo autoritativo del saldo, reservas y persistencia |
+| RF-M1-02 | `MonthlySummaryCards.test.tsx`, `dashboard/api/dashboard.test.ts`, `hooks/useDashboard.test.tsx`, E2E panel | Agregación y cortes de mes Bolivia |
+| RF-M1-03 | `ExpenseDistribution.test.tsx`, E2E panel | Agregación por categoría y redondeo |
+| RF-M1-04 | `BudgetIndicators.test.tsx`, `SavingsGoalsCard.test.tsx`, E2E panel | Consumo y estados autoritativos de presupuestos/metas |
+| RF-M2-01 | `transactions/TransactionsPage.test.tsx`, `hooks/useTransactionMutations.test.ts` | Crear/editar/anular en API real; conservación del historial |
+| RF-M2-02 | `TransactionsPage.test.tsx`, `hooks/useCategories.test.ts` | Propiedad de categorías y conflicto real por presupuesto |
+| RF-M2-03 | `TransactionsPage.test.tsx`: importe positivo exacto, fecha Bolivia y descripción opcional | Validaciones del servicio y persistencia |
+| RF-M2-04 | `TransactionsPage.test.tsx`, `hooks/useTransactions.test.tsx`: filtros, búsqueda, páginas, error/vacío y respuestas antiguas | Datos de dos cuentas e inclusión real del día final |
+| RF-M3-01 | `budgets/BudgetsPage.test.tsx`, `BudgetsPage.regression.test.tsx`, `hooks/useBudgets.test.tsx`, `e2e/budgets.spec.ts` | Mutaciones reales sin alterar movimientos |
+| RF-M3-02 | `BudgetsPage.regression.test.tsx`: categoría obligatoria/ausente/fallida y duplicado | Rechazo autoritativo de duplicado y propiedad |
+| RF-M3-03 | `BudgetsPage.regression.test.tsx`: valores exactos, barra contenida y restante negativo | Consumo y restante calculados por servicio |
+| RF-M3-04 | `BudgetsPage.regression.test.tsx`, `BudgetIndicators.test.tsx`: 79,99/80/100/100,01 con estados recibidos | Cálculo de umbrales; no acredita notificaciones persistidas |
+| RF-M4-01 | `reports/ReportsPage.test.tsx`, `api/reports.test.ts`, `e2e/reports.spec.ts` | Agregados reales de ingreso/gasto/neto |
+| RF-M4-02 | `ReportsPage.test.tsx`, E2E informes: distribución textual | Agregación real por categoría |
+| RF-M4-03 | `ReportsPage.test.tsx`, E2E informes: gráfico relativo y tabla exacta | Saldos y cortes mensuales reales |
+| RF-M4-04 | `ReportsPage.test.tsx`, `lib/period.test.ts`, `hooks/useReports.test.tsx`: límites, tardíos y refresco del mismo rango | Inclusión del último día; recorrido real de informes |
+| RF-M5-01 | `savings-goals/SavingsGoalsPage.test.tsx`, `e2e/savings-goals.spec.ts`: crear/editar/archivar/restaurar | Mutaciones reales, historial y propiedad |
+| RF-M5-02 | `SavingsGoalsPage.test.tsx`: nombre recortado, importe positivo y fecha opcional | Validación del servicio |
+| RF-M5-03 | `SavingsGoalsPage.test.tsx`: aporte/retiro, conflicto, estados, barra >100 y sesión | Efecto sobre saldo, persistencia y entradas reales |
+| RF-M5-04 | Sin implementación; [contrato propuesto](../specs/007-notificaciones/plan.md) y [traspaso](service-handoff.md) | Contrato confirmado, implementación y eventos reales |
+| RF-M6-01 | `account/UserProfilePage.test.tsx`, `shared/session/SessionProvider.test.tsx`, tests/E2E panel | Acceso y cierre del servicio real |
+| RF-M6-02 | `UserProfilePage.regression.test.tsx`: perfil tardío, nombre legado y conflicto | Compatibilidad de nombre legado y conflictos reales |
+| RF-M6-03 | `UserProfilePage.test.tsx`, regresiones, `e2e/account.spec.ts`: confirmación, longitud y error de contraseña | Hash seguro y revocación de todas las sesiones |
+| RF-M6-04 | Regresiones A/B de cuenta/metas/presupuestos, `SessionProvider.test.tsx`, hooks de consulta | Rechazo de lectura/escritura ajena y persistencia; API real no ejecutada |
+| RF-N-01..05 | Sin implementación ni tests de notificaciones | Todas las aceptaciones de la spec 007 siguen pendientes |
+
+Rutas de features abreviadas desde `src/features`; rutas shared desde `src`. Los [planes M1](../specs/001-panel/plan.md) y [M4](../specs/004-informes/plan.md) contienen el mapa sintético de datos y comprobaciones para el operador.
+
+### Dependencias y límites de cierre
+
+No existe contrato confirmado de notificaciones disponible en este frontend. Se preparó [service-handoff.md](service-handoff.md), sin afirmar que otra sesión lo haya recibido ni implementado. RF-M5-04 y RF-N-* siguen abiertos.
+
+El coordinador comprobó solo la presencia de las seis variables requeridas por el runner real: todas ausentes. No se ejecutó `test:e2e:real`, no se consultó la API y no se afirma que el servicio esté caído. Sin evidencia externa siguen pendientes integración, cálculos, persistencia, hash, revocación global y autorización del servidor. Las pruebas controladas no sustituyen esos resultados.
+
+La compatibilidad de `displayName` nulo se implementa contra el PATCH parcial local; M6-T1 mantiene pendiente la confirmación del servicio. El traspaso de seguridad está preparado; M6-T5 mantiene pendiente su recepción y respuesta externa.
+
+---
+## Antecedente: línea base documental SDD del 2026-10-29
 
 Fecha de documentación: 2026-10-29. Base inspeccionada: `6f4679e62dac6bfd067ca4472413f5dccff8f39d`, obtenida mediante `git fetch origin dev`.
 Rama documental: `docs/fe-sdd-baseline`. Worktree: `C:/fintrack/worktrees/frontend/fe-sdd-baseline`. Responsable único de Git: coordinador. Sin commit, push, merge ni despliegue.

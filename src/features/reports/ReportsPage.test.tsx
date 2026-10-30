@@ -106,3 +106,17 @@ it('distinguishes a valid empty report from loading or a transport error', async
   expect(screen.getByText('No hay saldos mensuales para mostrar en este período.')).toBeVisible();
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
+
+it('refreshes the same date interval when Actualizar is pressed again', async () => {
+  const fetcher = vi.fn((url: string) => url.endsWith('/auth/login') ? Promise.resolve(loginResponse()) : Promise.resolve(responseFor(url)));
+  vi.stubGlobal('fetch', fetcher);
+  render(<App />);
+  const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+  await user.type(screen.getByLabelText('Correo electrónico'), 'reports@fintrack.test');
+  await user.type(screen.getByLabelText('Contraseña', { exact: true }), 'synthetic-password');
+  await user.click(screen.getByRole('button', { name: 'Entrar a mi panel' }));
+  await screen.findByRole('heading', { name: 'Ingresos' });
+  const before = fetcher.mock.calls.filter(([url]) => String(url).includes('/reports?')).length;
+  await user.click(screen.getByRole('button', { name: 'Actualizar' }));
+  await waitFor(() => expect(fetcher.mock.calls.filter(([url]) => String(url).includes('/reports?'))).toHaveLength(before + 1));
+});

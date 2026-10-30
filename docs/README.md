@@ -1,6 +1,6 @@
 # Documentación de FinanTrack
 
-Punto de entrada de la documentación frontend. La línea base SDD refleja `origin/dev` en `6f4679e62dac6bfd067ca4472413f5dccff8f39d` (29 de octubre de 2026).
+Punto de entrada de la documentación frontend. La línea base SDD refleja `6f4679e62dac6bfd067ca4472413f5dccff8f39d` (29 de octubre de 2026). FE-SDD-02 actualiza correcciones y cobertura sobre `e9e6bd4` más el diff del worktree, el 30 de octubre de 2026; consultar la verificación vigente.
 
 | Consulta | Documento |
 | --- | --- |
@@ -16,6 +16,7 @@ Punto de entrada de la documentación frontend. La línea base SDD refleja `orig
 | Metas y alertas | [Spec](specs/005-metas/spec.md) · [Plan](specs/005-metas/plan.md) · [Tareas](specs/005-metas/tasks.md) |
 | Usuarios y seguridad | [Spec](specs/006-usuarios/spec.md) · [Plan](specs/006-usuarios/plan.md) · [Tareas](specs/006-usuarios/tasks.md) |
 | Notificaciones pendientes | [Spec propuesta](specs/007-notificaciones/spec.md) · [Plan](specs/007-notificaciones/plan.md) · [Tareas](specs/007-notificaciones/tasks.md) |
+| Traspaso pendiente al servicio | [Contrato propuesto y aceptación externa](sdd/service-handoff.md) |
 | Reutilizar el formato | [Plantillas](sdd/templates.md) |
 | Diseño y contrato actual | [Arquitectura](architecture.md) · [Integración](integration.md) · [Estilos](styles.md) |
 | Trabajo y ejecución | [Contribución](../CONTRIBUTING.md) · [README del proyecto](../README.md) |
