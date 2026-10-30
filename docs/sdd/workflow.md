@@ -16,6 +16,10 @@ EARS: «CUANDO ocurre un evento, el sistema DEBE producir un resultado»; «MIEN
 
 Los RF existentes mantienen IDs RF-M1-01 a RF-M6-04. Notificaciones añade RF-N-01 a RF-N-05 y completa RF-M5-04. No renumerar requisitos al agregar pruebas.
 
+Cada historia lleva un ID estable (`HU-M1-01` a `HU-M6-XX`; `HU-N-01` para notificaciones) y enlaza un issue real del repositorio frontend. El plan conserva una matriz historia → RF → tarea → issue, y `tasks.md` muestra la relación inversa de cada tarea. Un issue puede agrupar varias historias de un módulo. No renumerar HU, RF o tareas existentes.
+
+Antes de crear un issue, revisar los abiertos y cerrados para reutilizar seguimiento pertinente. Conservar checkboxes y evidencia ejecutada, separar capacidades presentes de pendientes y enlazar dependencias entre issues. Un PR documental que incorpora trazabilidad no cierra automáticamente historias cuya aceptación integrada sigue pendiente.
+
 ## 3. Revisar y planificar
 
 Revisar ambigüedades, contradicciones, límites y conflictos con constitución. Registrar la evidencia y resolver recomendaciones rutinarias sin cuestionario. Los planes detallan módulos existentes, contrato consumido, estados, decisiones con alternativa y estrategia de tests; no rediseñar lo que funciona.
@@ -24,7 +28,7 @@ Un contrato propuesto debe indicar que todavía no existe y separar dependencia 
 
 ## 4. Dividir y ejecutar solo lo encargado
 
-Cada `tasks.md` contiene únicamente pendientes: checkbox, ID, duración de 20–30 minutos, dependencia, RF y «Hecho cuando:» comprobable. No marcar tareas retrospectivas como ejecutadas. Partir una tarea que supere el límite.
+Cada `tasks.md` conserva las tareas y su estado real: checkbox, ID, duración de 20–30 minutos, dependencia, RF y «Hecho cuando:» comprobable. La tabla de trazabilidad enlaza historias e issue por tarea. No marcar tareas retrospectivas como ejecutadas. Partir una tarea que supere el límite.
 
 Para implementar después: preparar un worktree por feature y un responsable Git siguiendo [el protocolo](../../CONTRIBUTING.md) y C:/fintrack/docs/git-por-feature.md. Escribir el test pertinente, implementar solo la tarea encargada, ejecutar los checks aplicables y registrar resultado. La planificación actual no inicia estas tareas ni autoriza publicación.
 

@@ -1,4 +1,4 @@
-﻿# Tareas pendientes M4
+# Tareas pendientes M4
 No se reconstruyen informes ya existentes; se cierra evidencia por RF.
 
 - [x] **M4-T1 · Registrar pruebas locales de informes** · 25 min · RF-M4-01/02/03/04 · Depende: dependencias instaladas desde lockfile.
@@ -13,3 +13,15 @@ No se reconstruyen informes ya existentes; se cierra evidencia por RF.
   Hecho cuando: cada RF indica test/recorrido, ejecución y resultado; cualquier agregado o persistencia sin verificar mantiene el cierre integrado pendiente.
 
 Actualización FE-SDD-02 (2026-10-30): checks locales aprobados, Vitest 98/98 y Playwright 24/24. Véase [evidencia por RF](../../sdd/verification.md). Las casillas abiertas requieren evidencia externa o funcionalidad todavía pendiente.
+
+## Relación de tareas, historias e issue
+
+Los estados y criterios anteriores se conservan; esta tabla aporta trazabilidad sin acreditar trabajo adicional. El [plan](plan.md#trazabilidad-de-historias-e-issues) relaciona cada historia con sus RF.
+
+| Tarea | Historias | Issue |
+| --- | --- | --- |
+| `M4-T1` | [HU-M4-01](spec.md#hu-m4-01), [HU-M4-02](spec.md#hu-m4-02), [HU-M4-03](spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| `M4-T2` | [HU-M4-01](spec.md#hu-m4-01), [HU-M4-02](spec.md#hu-m4-02), [HU-M4-03](spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| `M4-T3` | [HU-M4-01](spec.md#hu-m4-01), [HU-M4-02](spec.md#hu-m4-02), [HU-M4-03](spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| `M4-T4` | [HU-M4-01](spec.md#hu-m4-01), [HU-M4-02](spec.md#hu-m4-02), [HU-M4-03](spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| `M4-T5` | [HU-M4-01](spec.md#hu-m4-01), [HU-M4-02](spec.md#hu-m4-02), [HU-M4-03](spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |

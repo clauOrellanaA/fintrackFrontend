@@ -10,8 +10,16 @@ El saldo disponible corresponde al corte comunicado; los resúmenes y gastos cor
 Persona con cuenta que consulta exclusivamente su información financiera.
 
 ## Historias de usuario
-- Como usuario, quiero conocer mi saldo y el resultado del mes para decidir mis próximos gastos.
-- Como usuario, quiero identificar categorías, presupuestos y metas para reconocer desvíos y avances.
+### HU-M1-01
+
+Como usuario, quiero conocer mi saldo y el resultado del mes para decidir mis próximos gastos.
+
+Requisitos: `RF-M1-01`, `RF-M1-02`. Seguimiento: [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31).
+### HU-M1-02
+
+Como usuario, quiero identificar categorías, presupuestos y metas para reconocer desvíos y avances.
+
+Requisitos: `RF-M1-03`, `RF-M1-04`. Seguimiento: [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31).
 
 ## Requisitos funcionales y aceptación
 **RF-M1-01 · Saldo disponible.**

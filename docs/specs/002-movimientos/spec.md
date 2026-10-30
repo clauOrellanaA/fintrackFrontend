@@ -10,9 +10,21 @@ Eliminar un movimiento significa anularlo y conservarlo en el historial.
 Persona autenticada que administra sus movimientos y sus categorías privadas.
 
 ## Historias de usuario
-- Como usuario, quiero registrar y corregir un movimiento para mantener mi historial actualizado.
-- Como usuario, quiero buscar por texto y período para encontrar registros concretos.
-- Como usuario, quiero clasificar mis movimientos para entender su propósito.
+### HU-M2-01
+
+Como usuario, quiero registrar y corregir un movimiento para mantener mi historial actualizado.
+
+Requisitos: `RF-M2-01`, `RF-M2-03`. Seguimiento: [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32).
+### HU-M2-02
+
+Como usuario, quiero buscar por texto y período para encontrar registros concretos.
+
+Requisitos: `RF-M2-04`. Seguimiento: [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32).
+### HU-M2-03
+
+Como usuario, quiero clasificar mis movimientos para entender su propósito.
+
+Requisitos: `RF-M2-02`. Seguimiento: [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32).
 
 ## Requisitos funcionales y aceptación
 **RF-M2-01 · Registrar, editar y anular.**

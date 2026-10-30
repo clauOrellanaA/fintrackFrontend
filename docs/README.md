@@ -28,3 +28,17 @@ Punto de entrada de la documentación frontend. La línea base SDD refleja `6f46
 Los documentos `fe-*-delivery.md`, `fe-m02-hooks.md`, `fe-m03-budget-management.md`, `fe-04-reports.md` y `fe-07-savings-goals.md` conservan su ubicación como antecedentes. Sus resultados corresponden a sus propias fechas y commits. No se trasladan ni se duplican sus evidencias como resultados actuales.
 
 Toda documentación nueva se incorpora en este índice. Las especificaciones describen el producto; los planes contienen archivos, tecnología y contratos. Los pendientes de otra capa se entregan a su sesión correspondiente.
+
+## Seguimiento de historias e issues
+
+FE-SDD-03 identifica las 18 historias existentes y las vincula con sus 29 RF y 50 tareas, sin modificar los estados de aceptación. Cada plan incluye la matriz historia → requisito → tarea → issue; `tasks.md` contiene la relación inversa. Los issues permanecen abiertos mientras falte evidencia o una dependencia externa.
+
+| Módulo | Historias | Issue de seguimiento |
+| --- | --- | --- |
+| Panel principal | [HU-M1-01](specs/001-panel/spec.md#hu-m1-01), [HU-M1-02](specs/001-panel/spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| Movimientos | [HU-M2-01](specs/002-movimientos/spec.md#hu-m2-01), [HU-M2-02](specs/002-movimientos/spec.md#hu-m2-02), [HU-M2-03](specs/002-movimientos/spec.md#hu-m2-03) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| Presupuestos | [HU-M3-01](specs/003-presupuestos/spec.md#hu-m3-01), [HU-M3-02](specs/003-presupuestos/spec.md#hu-m3-02) | [#33](https://github.com/clauOrellanaA/fintrackFrontend/issues/33) |
+| Informes | [HU-M4-01](specs/004-informes/spec.md#hu-m4-01), [HU-M4-02](specs/004-informes/spec.md#hu-m4-02), [HU-M4-03](specs/004-informes/spec.md#hu-m4-03) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| Metas y alertas | [HU-M5-01](specs/005-metas/spec.md#hu-m5-01), [HU-M5-02](specs/005-metas/spec.md#hu-m5-02), [HU-M5-03](specs/005-metas/spec.md#hu-m5-03) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| Usuarios y seguridad | [HU-M6-01](specs/006-usuarios/spec.md#hu-m6-01), [HU-M6-02](specs/006-usuarios/spec.md#hu-m6-02), [HU-M6-03](specs/006-usuarios/spec.md#hu-m6-03) | [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37) |
+| Notificaciones | [HU-N-01](specs/007-notificaciones/spec.md#hu-n-01), [HU-N-02](specs/007-notificaciones/spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |

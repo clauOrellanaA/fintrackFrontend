@@ -1,4 +1,4 @@
-﻿# Tareas pendientes M1
+# Tareas pendientes M1
 Las casillas reflejan la evidencia FE-SDD-02; documentar código existente no equivale a ejecutar sus pruebas.
 
 - [x] **M1-T1 · Registrar comprobaciones locales** · 25 min · RF-M1-01/02/03/04 · Depende: dependencias instaladas desde lockfile.
@@ -15,3 +15,15 @@ Las casillas reflejan la evidencia FE-SDD-02; documentar código existente no eq
 Si una comprobación detecta un defecto, crear una corrección acotada con su prueba; estas tareas no incluyen reparar defectos aún desconocidos.
 
 Actualización FE-SDD-02 (2026-10-30): checks locales aprobados, Vitest 98/98 y Playwright 24/24. Véase [evidencia por RF](../../sdd/verification.md). Las casillas abiertas requieren evidencia externa o funcionalidad todavía pendiente.
+
+## Relación de tareas, historias e issue
+
+Los estados y criterios anteriores se conservan; esta tabla aporta trazabilidad sin acreditar trabajo adicional. El [plan](plan.md#trazabilidad-de-historias-e-issues) relaciona cada historia con sus RF.
+
+| Tarea | Historias | Issue |
+| --- | --- | --- |
+| `M1-T1` | [HU-M1-01](spec.md#hu-m1-01), [HU-M1-02](spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| `M1-T2` | [HU-M1-01](spec.md#hu-m1-01), [HU-M1-02](spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| `M1-T3` | [HU-M1-01](spec.md#hu-m1-01), [HU-M1-02](spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| `M1-T4` | [HU-M1-01](spec.md#hu-m1-01), [HU-M1-02](spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| `M1-T5` | [HU-M1-01](spec.md#hu-m1-01), [HU-M1-02](spec.md#hu-m1-02) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |

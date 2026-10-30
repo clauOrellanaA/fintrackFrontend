@@ -1,5 +1,17 @@
 ﻿# Verificación y trazabilidad SDD
 
+## FE-SDD-03 · Historias e issues
+
+Fecha: 2026-10-30. Base `11d6552aabe8961ea5fbcffdfe09f78af6a29c83` más el diff del worktree `C:/fintrack/worktrees/frontend/fe-sdd-03-user-stories-issues`. Rama `docs/fe-sdd-03-user-stories-issues`; coordinador único responsable de Git y de los issues remotos.
+
+Entrega documental: 18 historias con IDs HU estables, trazabilidad historia → RF → tarea → issue en los siete planes y relación inversa en tareas. Se conservan los textos de las historias, los 29 RF, las 50 tareas, sus criterios y las 25 casillas completadas. Las plantillas y el flujo exigen mantener estos vínculos.
+
+Se consultaron issues abiertos y cerrados y se crearon siete seguimientos de módulo: #31, #32, #33, #34, #35, #37 y #38. Se verificó cada issue con GET: 18 historias, 50 tareas y 25 casillas completadas, todos abiertos mientras falte aceptación integrada. El issue #35 enlaza su dependencia de notificaciones #38. Enlaces individuales en el [índice de historias e issues](../README.md#seguimiento-de-historias-e-issues). No se modificaron recursos del repositorio del servicio.
+
+Validaciones ejecutadas por frontend-documenter: 304 enlaces relativos y anchors válidos, IDs únicos, cobertura completa de historias/RF/tareas, comparación de textos, checkboxes y criterios con la base Git, Unicode y `git diff --check` aprobados. El coordinador verificó los siete issues mediante la API de GitHub. Revisión independiente de los 25 Markdown aprobada sin hallazgos bloqueantes: 311 enlaces relativos y anchors válidos, trazabilidad coherente sin historias, RF o tareas huérfanos y estados originales conservados. No hubo nuevas ejecuciones funcionales.
+
+No se ejecutaron suites funcionales: el diff contiene únicamente Markdown. Los resultados de FE-SDD-02 que siguen corresponden a esa entrega, no a una nueva ejecución. Esta actualización de trazabilidad no implementa notificaciones ni cierra integración, persistencia o seguridad del servicio; tampoco cierra automáticamente sus issues.
+
 ## FE-SDD-02 · Correcciones y cobertura local
 
 Fecha: 2026-10-30. Base `e9e6bd4d3c9a36c02d3e7e41cc58a9a2c5d01983` más el diff del worktree `C:/fintrack/worktrees/frontend/fe-sdd-02-spec-completion`. Rama `fix/fe-sdd-02-spec-completion`; coordinador único responsable de Git. Esta identificación describe la versión de trabajo comprobada, sin atribuirla a un commit futuro.

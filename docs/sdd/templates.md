@@ -5,7 +5,7 @@ Copiar solo el conjunto del módulo afectado. Mantener las specs libres de decis
 ## spec.md
 
 - Contexto y objetivo: problema y beneficio.
-- Usuarios e historias: «Como … quiero … para …».
+- Usuarios e historias: «Como … quiero … para …», con identificador estable `HU-X-01`, RF asociados y enlace a un issue real del repositorio.
 - RF-X-01 — nombre: estado OBSERVADO / RECOMENDACIÓN / DEPENDENCIA EXTERNA.
   - CUANDO [evento], el sistema DEBE [resultado verificable].
   - SI [error], el sistema DEBE [respuesta observable].
@@ -16,6 +16,7 @@ Copiar solo el conjunto del módulo afectado. Mantener las specs libres de decis
 ## plan.md
 
 - Base y alcance frontend.
+- Tabla historia `HU-X-01` → RF → tareas → enlace al issue real; puede agrupar varias historias en un issue de seguimiento del módulo.
 - Tabla RF → componente/hook/contrato existente → test candidato.
 - Contrato HTTP vigente o propuesta explícitamente marcada: método, ruta, entrada, salida, errores, autenticación, propiedad, moneda, fechas.
 - Decisión, justificación y alternativa descartada.
@@ -26,6 +27,8 @@ Copiar solo el conjunto del módulo afectado. Mantener las specs libres de decis
 
 - [ ] T-X-01 (20–30 min) — acción única. RF: RF-X-01. Depende de: ninguna.
   Hecho cuando: resultado comprobable con test/comando/artefacto identificado.
+
+La tabla de tareas debe vincular cada ID `T-X-01` con sus historias y el mismo issue real. No inventar números ni cambiar checkboxes al incorporar enlaces. Registrar dependencias entre issues sin duplicar implementaciones.
 
 ## Registro de evidencia
 

@@ -2,6 +2,17 @@
 Estado: reconstrucción técnica del frontend existente; no autoriza implementación.
 Base auditada: 6f4679e; fecha: 2026-10-29.
 
+## Trazabilidad de historias e issues
+
+FE-SDD-03, 2026-10-30. El issue del módulo agrupa sus historias y tareas; permanece abierto hasta acreditar la aceptación completa. Las capacidades y pruebas locales existentes conservan su evidencia.
+
+| Historia | Requisitos | Tareas | Issue |
+| --- | --- | --- | --- |
+| [HU-M1-01](spec.md#hu-m1-01) | `RF-M1-01`, `RF-M1-02` | [M1-T1](tasks.md), [M1-T2](tasks.md), [M1-T3](tasks.md), [M1-T4](tasks.md), [M1-T5](tasks.md) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+| [HU-M1-02](spec.md#hu-m1-02) | `RF-M1-03`, `RF-M1-04` | [M1-T1](tasks.md), [M1-T2](tasks.md), [M1-T3](tasks.md), [M1-T4](tasks.md), [M1-T5](tasks.md) | [#31](https://github.com/clauOrellanaA/fintrackFrontend/issues/31) |
+
+El detalle de aceptación está en la [spec](spec.md); el estado de cada tarea se conserva en [tasks.md](tasks.md). Un enlace o un issue cerrado no sustituye los resultados por RF.
+
 ## Estructura existente y RF
 - `src/features/dashboard/DashboardPage.tsx`: período, acceso, carga, error y vacío; RF-M1-01 a RF-M1-04.
 - `hooks/useDashboard.ts`: consulta ligada a token/mes y descarte de respuestas antiguas; RF-M1-01 a RF-M1-04.

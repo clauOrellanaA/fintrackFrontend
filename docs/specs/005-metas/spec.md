@@ -10,9 +10,21 @@ Los indicadores existentes muestran estados; una bandeja persistente de notifica
 Persona autenticada que administra sus objetivos de ahorro.
 
 ## Historias de usuario
-- Como usuario, quiero crear una meta con importe y fecha opcional para planificar mi ahorro.
-- Como usuario, quiero registrar aportes o retiros para seguir el progreso.
-- Como usuario, quiero recibir avisos sobre presupuestos y objetivos para reconocer cambios relevantes; esta historia permanece pendiente.
+### HU-M5-01
+
+Como usuario, quiero crear una meta con importe y fecha opcional para planificar mi ahorro.
+
+Requisitos: `RF-M5-01`, `RF-M5-02`. Seguimiento: [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35).
+### HU-M5-02
+
+Como usuario, quiero registrar aportes o retiros para seguir el progreso.
+
+Requisitos: `RF-M5-03`. Seguimiento: [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35).
+### HU-M5-03
+
+Como usuario, quiero recibir avisos sobre presupuestos y objetivos para reconocer cambios relevantes; esta historia permanece pendiente.
+
+Requisitos: `RF-M5-04`. Seguimiento: [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35). Depende de [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) y de la [spec de notificaciones](../007-notificaciones/spec.md).
 
 ## Requisitos funcionales y aceptación
 **RF-M5-01 · Creación y gestión de metas.**

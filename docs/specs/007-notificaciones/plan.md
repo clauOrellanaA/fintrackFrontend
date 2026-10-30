@@ -2,6 +2,17 @@
 
 Estado: propuesta frontend; no hay contrato de notificaciones implementado en este repositorio. Base: `6f4679e62dac6bfd067ca4472413f5dccff8f39d`. Cubre RF-M5-04 y RF-N-01..05.
 
+## Trazabilidad de historias e issues
+
+FE-SDD-03, 2026-10-30. El issue del módulo agrupa sus historias y tareas; permanece abierto hasta acreditar la aceptación completa. Las capacidades y pruebas locales existentes conservan su evidencia.
+
+| Historia | Requisitos | Tareas | Issue |
+| --- | --- | --- | --- |
+| [HU-N-01](spec.md#hu-n-01) | `RF-N-01`, `RF-N-02`, `RF-N-03`, `RF-N-05` | [T-N-01](tasks.md), [T-N-02](tasks.md), [T-N-03](tasks.md), [T-N-04](tasks.md), [T-N-05](tasks.md), [T-N-07](tasks.md), [T-N-08](tasks.md), [T-N-09](tasks.md), [T-N-10](tasks.md), [T-N-11](tasks.md), [T-N-12](tasks.md), [T-N-13](tasks.md), [T-N-14](tasks.md) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| [HU-N-02](spec.md#hu-n-02) | `RF-N-04`, `RF-N-05` | [T-N-01](tasks.md), [T-N-02](tasks.md), [T-N-03](tasks.md), [T-N-06](tasks.md), [T-N-07](tasks.md), [T-N-08](tasks.md), [T-N-09](tasks.md), [T-N-10](tasks.md), [T-N-11](tasks.md), [T-N-12](tasks.md), [T-N-13](tasks.md), [T-N-14](tasks.md) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+
+El detalle de aceptación está en la [spec](spec.md); el estado de cada tarea se conserva en [tasks.md](tasks.md). Un enlace o un issue cerrado no sustituye los resultados por RF.
+
 ## Estructura propuesta
 
 | Parte | Responsabilidad | RF |
