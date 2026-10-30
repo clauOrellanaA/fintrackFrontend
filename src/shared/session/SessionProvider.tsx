@@ -9,8 +9,8 @@ interface SessionContextValue {
   signIn(email: string, password: string): Promise<void>;
   signUp(email: string, password: string, displayName: string): Promise<void>;
   signOut(): Promise<void>;
-  updateEmail(email: string): void;
-  passwordChanged(): void;
+  updateEmail(token: string, email: string): boolean;
+  passwordChanged(token: string): boolean;
   expire(token: string): void;
 }
 const SessionContext = createContext<SessionContextValue | null>(null);
@@ -55,19 +55,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const result = await registerAccount(normalizedEmail, password, displayName.trim(), controller.signal);
     acceptSession(version, controller, normalizedEmail, result);
   }
-  function updateEmail(email: string) {
+  function updateEmail(token: string, email: string) {
     const previous = current.current;
-    if (!previous) return;
+    if (!previous || previous.token !== token) return false;
     const next = { ...previous, email };
     current.current = next;
     setSession(next);
+    return true;
   }
-  function passwordChanged() {
+  function passwordChanged(token: string) {
+    if (current.current?.token !== token) return false;
     generation.current++;
     pending.current?.abort();
     current.current = null;
     setSession(null);
     setNotice('password-changed');
+    return true;
   }
   async function signOut() {
     const previous = current.current;

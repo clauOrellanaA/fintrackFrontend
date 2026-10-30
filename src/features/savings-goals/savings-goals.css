@@ -1,0 +1,51 @@
+.savings-page { max-width: 1120px; margin: 0 auto; }
+.savings-page > .page-heading { margin-bottom: 24px; }
+.savings-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+.savings-toolbar__copy { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); }
+.savings-toolbar__actions, .savings-card__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.savings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.savings-card { min-width: 0; padding: 21px; border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-surface); }
+.savings-card--completed { border-color: color-mix(in srgb, var(--color-success) 40%, var(--color-border)); }
+.savings-card--overdue { border-color: color-mix(in srgb, var(--color-warning) 42%, var(--color-border)); }
+.savings-card--archived { opacity: .76; }
+.savings-card__top, .savings-card__row, .savings-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.savings-card__icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; color: var(--color-primary); background: var(--color-surface-sidebar); }
+.savings-card__badge { padding: 5px 8px; border-radius: 7px; background: var(--color-success-background); color: var(--color-success); font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); }
+.savings-card__badge--overdue { background: var(--color-warning-background); color: var(--color-warning); }
+.savings-card__badge--archived { background: var(--color-surface-hover); color: var(--color-text-secondary); }
+.savings-card h2 { margin: 16px 0 4px; font-size: var(--font-size-lg); letter-spacing: -0.025em; }
+.savings-card__date { margin: 0; color: var(--color-text-secondary); font-size: var(--font-size-xs); }
+.savings-card__amounts { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.savings-card__amounts > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.savings-card__amounts span, .savings-card__footer { color: var(--color-text-secondary); font-size: var(--font-size-2xs); }
+.savings-card__amounts strong, .savings-card__footer strong { color: var(--color-text); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); overflow-wrap: anywhere; }
+.savings-progress { height: 9px; overflow: hidden; margin-top: 15px; border-radius: 999px; background: var(--color-progress-track); }
+.savings-progress > span { display: block; width: var(--savings-progress); height: 100%; border-radius: inherit; background: var(--color-primary); transition: width 150ms ease; }
+.savings-card--completed .savings-progress > span { background: var(--color-success); }
+.savings-card--overdue .savings-progress > span { background: var(--color-warning); }
+.savings-card__footer { margin-top: 8px; }
+.savings-card__footer span { display: inline-flex; align-items: center; gap: 5px; }
+.savings-card__actions { margin-top: 18px; padding-top: 13px; border-top: 1px solid var(--color-border); }
+.savings-card__actions .button { min-height: 35px; padding: 7px 10px; }
+.savings-state-panel, .savings-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 245px; padding: 28px; border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-surface); text-align: center; }
+.savings-state-panel { flex-direction: row; min-height: 120px; color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.savings-state-panel--error { flex-direction: column; color: var(--color-danger); }
+.savings-state-panel--error p { max-width: 420px; margin: 0 0 4px; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.6; }
+.savings-empty > span { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 17px; background: var(--color-surface-sidebar); color: var(--color-primary); }
+.savings-empty h2 { margin: 4px 0 0; font-size: var(--font-size-md); }
+.savings-empty p { max-width: 430px; margin: 0 0 6px; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.7; }
+.savings-overlay { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; overflow-y: auto; padding: 20px; background: rgb(36 32 45 / .48); }
+.savings-dialog { width: min(100%, 520px); padding: 24px; border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); box-shadow: 0 24px 70px var(--color-shadow); }
+.savings-dialog__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 21px; }
+.savings-dialog__header h2 { margin: 0; font-size: var(--font-size-xl); letter-spacing: -0.035em; }
+.savings-form { display: flex; flex-direction: column; gap: 16px; }
+.savings-form label { display: block; font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); }
+.savings-form label > span { display: block; margin-top: 5px; color: var(--color-text-secondary); font-size: var(--font-size-2xs); font-weight: var(--font-weight-regular); }
+.savings-form input, .savings-form select { width: 100%; min-width: 0; height: 45px; margin-top: 8px; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); color: var(--color-text); font-size: var(--font-size-sm); }
+.savings-form input:focus, .savings-form select:focus { border-color: var(--color-primary); }
+.savings-form__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; }
+.savings-dialog__actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 6px; }
+.savings-page > .notice { margin-bottom: 14px; }
+@media (max-width: 800px) { .savings-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .savings-toolbar { align-items: stretch; flex-direction: column; } .savings-toolbar__actions { justify-content: stretch; } .savings-toolbar__actions .button { flex: 1; } .savings-form__grid { grid-template-columns: minmax(0, 1fr); } .savings-dialog { padding: 19px; } .savings-dialog__actions { flex-wrap: wrap; } }
+@media (prefers-reduced-motion: reduce) { .savings-progress > span { transition: none; } }

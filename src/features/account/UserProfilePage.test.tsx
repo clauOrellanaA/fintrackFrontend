@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+﻿import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, it, vi } from 'vitest';
 import { App } from '../../app/App';
@@ -61,7 +61,10 @@ it('registers an account, updates its profile and requires sign-in after changin
   await user.type(screen.getByLabelText('Nueva contraseña'), 'another-long-password');
   await user.type(screen.getByLabelText('Confirma la nueva contraseña'), 'another-long-password');
   await user.click(screen.getByRole('button', { name: 'Actualizar contraseña' }));
-  expect(await screen.findByText('Contraseña actualizada. Inicia sesión con tu nueva contraseña.')).toBeVisible();
+  await waitFor(() => {
+    expect(window.location.pathname).toBe('/dashboard');
+    expect(screen.getByText('Contraseña actualizada. Inicia sesión con tu nueva contraseña.')).toBeVisible();
+  });
   await waitFor(() => expect(fetchMock.mock.calls.some(([url]) => String(url).endsWith('/auth/password'))).toBe(true));
   expect(screen.getByRole('heading', { name: 'Tu panel te espera' })).toBeVisible();
 }, 15000);
