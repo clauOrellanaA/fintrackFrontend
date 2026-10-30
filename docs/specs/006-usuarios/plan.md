@@ -2,6 +2,18 @@
 Estado: acceso y perfil presentes; seguridad externa sin acreditar.
 Base auditada: 6f4679e; fecha: 2026-10-29.
 
+## Trazabilidad de historias e issues
+
+FE-SDD-03, 2026-10-30. El issue del módulo agrupa sus historias y tareas; permanece abierto hasta acreditar la aceptación completa. Las capacidades y pruebas locales existentes conservan su evidencia.
+
+| Historia | Requisitos | Tareas | Issue |
+| --- | --- | --- | --- |
+| [HU-M6-01](spec.md#hu-m6-01) | `RF-M6-01` | [M6-T3](tasks.md), [M6-T4](tasks.md), [M6-T6](tasks.md) | [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37) |
+| [HU-M6-02](spec.md#hu-m6-02) | `RF-M6-02`, `RF-M6-03` | [M6-T1](tasks.md), [M6-T2](tasks.md), [M6-T4](tasks.md), [M6-T5](tasks.md), [M6-T6](tasks.md) | [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37) |
+| [HU-M6-03](spec.md#hu-m6-03) | `RF-M6-04` | [M6-T3](tasks.md), [M6-T4](tasks.md), [M6-T5](tasks.md), [M6-T6](tasks.md) | [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37) |
+
+El detalle de aceptación está en la [spec](spec.md); el estado de cada tarea se conserva en [tasks.md](tasks.md). Un enlace o un issue cerrado no sustituye los resultados por RF.
+
 ## Estructura existente y RF
 - `src/features/auth/SignInPanel.tsx`: acceso/registro, contraseña oculta y avisos; RF-M6-01/03.
 - `src/shared/session/SessionProvider.tsx`: sesión en memoria, normalización, cierre, expiración y generaciones de acceso; RF-M6-01/03/04.

@@ -1,4 +1,4 @@
-﻿# Tareas pendientes M5
+# Tareas pendientes M5
 La gestión está implementada y la cobertura local fue ejecutada en FE-SDD-02; las operaciones reales y notificaciones siguen pendientes.
 
 - [x] **M5-T1 · Preparar fixtures de gestión** · 20 min · RF-M5-01/02/03 · Depende: contrato vigente.
@@ -19,3 +19,18 @@ La gestión está implementada y la cobertura local fue ejecutada en FE-SDD-02; 
   Hecho cuando: la matriz del módulo enlaza los resultados de notificaciones; mientras 007 esté pendiente, RF-M5-04 sigue sin marcar como cumplido.
 
 Actualización FE-SDD-02 (2026-10-30): checks locales aprobados, Vitest 98/98 y Playwright 24/24. Véase [evidencia por RF](../../sdd/verification.md). Las casillas abiertas requieren evidencia externa o funcionalidad todavía pendiente.
+
+## Relación de tareas, historias e issue
+
+Los estados y criterios anteriores se conservan; esta tabla aporta trazabilidad sin acreditar trabajo adicional. El [plan](plan.md#trazabilidad-de-historias-e-issues) relaciona cada historia con sus RF.
+
+| Tarea | Historias | Issue |
+| --- | --- | --- |
+| `M5-T1` | [HU-M5-01](spec.md#hu-m5-01), [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T2` | [HU-M5-01](spec.md#hu-m5-01) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T3` | [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T4` | [HU-M5-01](spec.md#hu-m5-01), [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T5` | [HU-M5-01](spec.md#hu-m5-01), [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T6` | [HU-M5-01](spec.md#hu-m5-01), [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T7` | [HU-M5-01](spec.md#hu-m5-01), [HU-M5-02](spec.md#hu-m5-02) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| `M5-T8` | [HU-M5-03](spec.md#hu-m5-03) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35); depende de [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |

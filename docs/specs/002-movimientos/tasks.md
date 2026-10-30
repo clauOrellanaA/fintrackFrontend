@@ -1,4 +1,4 @@
-﻿# Tareas pendientes M2
+# Tareas pendientes M2
 Duraciones para una entrega pequeña por casilla; no incluyen preparar infraestructura externa.
 
 - [x] **M2-T1 · Cubrir validación de campos** · 25 min · RF-M2-03 · Depende: fixtures sintéticos del contrato.
@@ -17,3 +17,17 @@ Duraciones para una entrega pequeña por casilla; no incluyen preparar infraestr
   Hecho cuando: existe evidencia de crear/editar/anular, filtros y clasificación en la API, con historial conservado y acceso cruzado rechazado; la persistencia se vincula a validación externa.
 
 Actualización FE-SDD-02 (2026-10-30): checks locales aprobados, Vitest 98/98 y Playwright 24/24. Véase [evidencia por RF](../../sdd/verification.md). Las casillas abiertas requieren evidencia externa o funcionalidad todavía pendiente.
+
+## Relación de tareas, historias e issue
+
+Los estados y criterios anteriores se conservan; esta tabla aporta trazabilidad sin acreditar trabajo adicional. El [plan](plan.md#trazabilidad-de-historias-e-issues) relaciona cada historia con sus RF.
+
+| Tarea | Historias | Issue |
+| --- | --- | --- |
+| `M2-T1` | [HU-M2-01](spec.md#hu-m2-01) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T2` | [HU-M2-02](spec.md#hu-m2-02) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T3` | [HU-M2-02](spec.md#hu-m2-02) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T4` | [HU-M2-01](spec.md#hu-m2-01) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T5` | [HU-M2-03](spec.md#hu-m2-03) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T6` | [HU-M2-01](spec.md#hu-m2-01), [HU-M2-02](spec.md#hu-m2-02), [HU-M2-03](spec.md#hu-m2-03) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |
+| `M2-T7` | [HU-M2-01](spec.md#hu-m2-01), [HU-M2-02](spec.md#hu-m2-02), [HU-M2-03](spec.md#hu-m2-03) | [#32](https://github.com/clauOrellanaA/fintrackFrontend/issues/32) |

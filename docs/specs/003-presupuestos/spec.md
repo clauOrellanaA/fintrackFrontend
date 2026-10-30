@@ -10,8 +10,16 @@ Las advertencias actuales se muestran junto a cada presupuesto; no constituyen u
 Persona autenticada que planifica y revisa sus límites de gasto.
 
 ## Historias de usuario
-- Como usuario, quiero asignar un límite mensual a una categoría para controlar mis gastos.
-- Como usuario, quiero reconocer acercamientos y excesos para ajustar mis decisiones.
+### HU-M3-01
+
+Como usuario, quiero asignar un límite mensual a una categoría para controlar mis gastos.
+
+Requisitos: `RF-M3-01`, `RF-M3-02`. Seguimiento: [#33](https://github.com/clauOrellanaA/fintrackFrontend/issues/33).
+### HU-M3-02
+
+Como usuario, quiero reconocer acercamientos y excesos para ajustar mis decisiones.
+
+Requisitos: `RF-M3-03`, `RF-M3-04`. Seguimiento: [#33](https://github.com/clauOrellanaA/fintrackFrontend/issues/33).
 
 ## Requisitos funcionales y aceptación
 **RF-M3-01 · Límites mensuales.**

@@ -2,6 +2,18 @@
 Estado: gestión presente en la base; cobertura de gestión y notificaciones pendientes.
 Base auditada: 6f4679e; fecha: 2026-10-29.
 
+## Trazabilidad de historias e issues
+
+FE-SDD-03, 2026-10-30. El issue del módulo agrupa sus historias y tareas; permanece abierto hasta acreditar la aceptación completa. Las capacidades y pruebas locales existentes conservan su evidencia.
+
+| Historia | Requisitos | Tareas | Issue |
+| --- | --- | --- | --- |
+| [HU-M5-01](spec.md#hu-m5-01) | `RF-M5-01`, `RF-M5-02` | [M5-T1](tasks.md), [M5-T2](tasks.md), [M5-T4](tasks.md), [M5-T5](tasks.md), [M5-T6](tasks.md), [M5-T7](tasks.md) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| [HU-M5-02](spec.md#hu-m5-02) | `RF-M5-03` | [M5-T1](tasks.md), [M5-T3](tasks.md), [M5-T4](tasks.md), [M5-T5](tasks.md), [M5-T6](tasks.md), [M5-T7](tasks.md) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35) |
+| [HU-M5-03](spec.md#hu-m5-03) | `RF-M5-04` | [M5-T8](tasks.md) | [#35](https://github.com/clauOrellanaA/fintrackFrontend/issues/35); depende de [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+
+El detalle de aceptación está en la [spec](spec.md); el estado de cada tarea se conserva en [tasks.md](tasks.md). Un enlace o un issue cerrado no sustituye los resultados por RF.
+
 ## Estructura existente y RF
 - `src/features/savings-goals/SavingsGoalsPage.tsx`: lista, formularios, tarjetas y archivo/restauración; RF-M5-01/02/03.
 - `hooks/useSavingsGoals.ts`: consulta por token, descarte de lectura obsoleta y mutaciones con recarga; RF-M5-01/03.

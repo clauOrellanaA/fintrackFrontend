@@ -9,8 +9,16 @@ Los indicadores actuales requieren visitar cada pantalla. Una bandeja permite co
 ## Usuarios e historias
 
 Persona autenticada que gestiona sus finanzas:
-- Como usuario, quiero consultar avisos para identificar presupuestos en riesgo y cambios relevantes de mis metas.
-- Como usuario, quiero distinguir y marcar avisos leídos para saber cuáles me quedan por revisar.
+### HU-N-01
+
+Como usuario, quiero consultar avisos para identificar presupuestos en riesgo y cambios relevantes de mis metas.
+
+Requisitos: `RF-N-01`, `RF-N-02`, `RF-N-03`, `RF-N-05`. Seguimiento: [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38).
+### HU-N-02
+
+Como usuario, quiero distinguir y marcar avisos leídos para saber cuáles me quedan por revisar.
+
+Requisitos: `RF-N-04`, `RF-N-05`. Seguimiento: [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38).
 
 ## Requisitos y aceptación EARS
 

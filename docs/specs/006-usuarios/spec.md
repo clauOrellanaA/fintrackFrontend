@@ -10,9 +10,21 @@ La interfaz controla la sesión visible; la protección real de credenciales y l
 Persona que registra una cuenta y persona autenticada que administra su perfil.
 
 ## Historias de usuario
-- Como visitante, quiero registrarme o iniciar sesión para entrar a mi espacio financiero.
-- Como usuario, quiero actualizar mi perfil y contraseña para mantener mi cuenta.
-- Como usuario, quiero que mis datos estén restringidos a mi identidad.
+### HU-M6-01
+
+Como visitante, quiero registrarme o iniciar sesión para entrar a mi espacio financiero.
+
+Requisitos: `RF-M6-01`. Seguimiento: [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37).
+### HU-M6-02
+
+Como usuario, quiero actualizar mi perfil y contraseña para mantener mi cuenta.
+
+Requisitos: `RF-M6-02`, `RF-M6-03`. Seguimiento: [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37).
+### HU-M6-03
+
+Como usuario, quiero que mis datos estén restringidos a mi identidad.
+
+Requisitos: `RF-M6-04`. Seguimiento: [#37](https://github.com/clauOrellanaA/fintrackFrontend/issues/37).
 
 ## Requisitos funcionales y aceptación
 **RF-M6-01 · Registro, acceso y cierre.**

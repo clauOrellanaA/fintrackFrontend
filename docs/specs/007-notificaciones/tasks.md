@@ -1,4 +1,4 @@
-﻿# Tareas pendientes de notificaciones
+# Tareas pendientes de notificaciones
 
 Implementación sin iniciar: contrato no confirmado. FE-SDD-02 preparó el traspaso externo sin consumir rutas propuestas. IDs T-N; 20–30 minutos por tarea local. Duraciones no incluyen esperas por la dependencia externa ni garantizan su disponibilidad.
 
@@ -32,3 +32,24 @@ Implementación sin iniciar: contrato no confirmado. FE-SDD-02 preparó el trasp
   Hecho cuando: cada RF enlaza evidencia del alcance correcto y los pendientes reales continúan abiertos.
 
 FE-SDD-02: [solicitud preparada para el servicio](../../sdd/service-handoff.md). T-N-01 sigue pendiente porque no se ha recibido confirmación del contrato; tampoco se presupone ejecución de las tareas dependientes.
+
+## Relación de tareas, historias e issue
+
+Los estados y criterios anteriores se conservan; esta tabla aporta trazabilidad sin acreditar trabajo adicional. El [plan](plan.md#trazabilidad-de-historias-e-issues) relaciona cada historia con sus RF.
+
+| Tarea | Historias | Issue |
+| --- | --- | --- |
+| `T-N-01` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-02` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-03` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-04` | [HU-N-01](spec.md#hu-n-01) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-05` | [HU-N-01](spec.md#hu-n-01) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-06` | [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-07` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-08` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-09` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-10` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-11` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-12` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-13` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |
+| `T-N-14` | [HU-N-01](spec.md#hu-n-01), [HU-N-02](spec.md#hu-n-02) | [#38](https://github.com/clauOrellanaA/fintrackFrontend/issues/38) |

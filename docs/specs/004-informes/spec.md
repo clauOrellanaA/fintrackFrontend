@@ -10,9 +10,21 @@ Los resultados corresponden a los valores informados para ese intervalo y a un c
 Persona autenticada que analiza sus finanzas durante uno o varios meses.
 
 ## Historias de usuario
-- Como usuario, quiero comparar ingresos y gastos para comprender el resultado del período.
-- Como usuario, quiero ver gastos por categoría y evolución mensual para reconocer patrones.
-- Como usuario, quiero elegir fechas para acotar el análisis.
+### HU-M4-01
+
+Como usuario, quiero comparar ingresos y gastos para comprender el resultado del período.
+
+Requisitos: `RF-M4-01`. Seguimiento: [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34).
+### HU-M4-02
+
+Como usuario, quiero ver gastos por categoría y evolución mensual para reconocer patrones.
+
+Requisitos: `RF-M4-02`, `RF-M4-03`. Seguimiento: [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34).
+### HU-M4-03
+
+Como usuario, quiero elegir fechas para acotar el análisis.
+
+Requisitos: `RF-M4-04`. Seguimiento: [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34).
 
 ## Requisitos funcionales y aceptación
 **RF-M4-01 · Comparación de ingresos y gastos.**

@@ -2,6 +2,18 @@
 Estado: reconstrucción técnica del frontend existente; validación real pendiente.
 Base auditada: 6f4679e; fecha: 2026-10-29.
 
+## Trazabilidad de historias e issues
+
+FE-SDD-03, 2026-10-30. El issue del módulo agrupa sus historias y tareas; permanece abierto hasta acreditar la aceptación completa. Las capacidades y pruebas locales existentes conservan su evidencia.
+
+| Historia | Requisitos | Tareas | Issue |
+| --- | --- | --- | --- |
+| [HU-M4-01](spec.md#hu-m4-01) | `RF-M4-01` | [M4-T1](tasks.md), [M4-T2](tasks.md), [M4-T3](tasks.md), [M4-T4](tasks.md), [M4-T5](tasks.md) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| [HU-M4-02](spec.md#hu-m4-02) | `RF-M4-02`, `RF-M4-03` | [M4-T1](tasks.md), [M4-T2](tasks.md), [M4-T3](tasks.md), [M4-T4](tasks.md), [M4-T5](tasks.md) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+| [HU-M4-03](spec.md#hu-m4-03) | `RF-M4-04` | [M4-T1](tasks.md), [M4-T2](tasks.md), [M4-T3](tasks.md), [M4-T4](tasks.md), [M4-T5](tasks.md) | [#34](https://github.com/clauOrellanaA/fintrackFrontend/issues/34) |
+
+El detalle de aceptación está en la [spec](spec.md); el estado de cada tarea se conserva en [tasks.md](tasks.md). Un enlace o un issue cerrado no sustituye los resultados por RF.
+
 ## Estructura existente y RF
 - `src/features/reports/ReportsPage.tsx`: métricas, distribución, serie y formulario de período; RF-M4-01 a RF-M4-04.
 - `hooks/useReports.ts`: consulta por token/intervalo, errores y descarte de respuestas tardías; todos los RF.
